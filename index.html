@@ -36,6 +36,10 @@
     img{max-width:100%; display:block}
     .container{width:min(1120px, 92vw); margin:0 auto}
 
+    /* Списки: отступы и переносы, чтобы не резало строки на мобилках */
+    ul{padding-left:1.2em; margin:.6em 0 .2em}
+    li{margin:.35em 0; line-height:1.55; overflow-wrap:anywhere; hyphens:auto}
+
     /* --- Навбар / UI --- */
     .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(120%) blur(8px); background:linear-gradient(to bottom, rgba(11,13,16,.85), rgba(11,13,16,.65)); border-bottom:1px solid var(--line)}
     .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
@@ -94,7 +98,7 @@
     }
     @keyframes gridShift{ 0%{ background-position:0 0, 0 0 } 100%{ background-position: 480px 0, 0 480px } }
 
-    .grain{z-index:-1; opacity:.06; mix-blend-mode:soft-light; background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsSAAALEgHS3X78AAABcElEQVR4nO2bvU7DQBCEZ6sQ4h2gE0w6kJ3gC5wBq0C4h+0K0FQyQvXgqQn9dD3Wg6gA2o8p9l3Zb3iV1lQe2k9nY8mQy6KQe3k+z9wE5rJwq7mXQqVwHXL4l0k6l9GQm3v0q0d7Q8q2N3wZ9s1c0Q3Y2m4G6wQJt0iHq3R8b5H5l8w7wqN3b5s8Qw2Vv3gqQ8aJr4Xk1xK7w0q2kQ3h1bZc9uUj6Ucn3vQmZ7sU8Qd1cZ3t1i8h6kKk3jQW5Qb5sC5d9wqF2cF7YQF3X1s2mQdZb0rCqR4vR2Zx9gXyqk+vRr8Q1e2k9b6J9n3j0q3n0v4c6Qyqf9b1oZ2r9b9m7E1m2vC0gS0f8eWb7g2u8t0J3n9bCj9m8Qp0cZ8a0Hf0m9w0x3Kq7wTg5+o9C8u7zq7I1qQvQxw7V1U1eQxXrQAAAABJRU5ErkJggg==')}
+    .grain{z-index:-1; opacity:.06; mix-blend-mode:soft-light; background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsSAAALEgHS3X78AAABcElEQVR4nO2bvU7DQBCEZ6sQ4h2gE0w6kJ3gC5wBq0C4h+0K0FQyQvXgqQn9dD3Wg6gA2o8p9l3Zb3iV1lQe2k9nY8mQy6KQe3k+z9wE5rJwq7mXQqVwHXL4l0k6l9GQm3v0q0d7Q8q2N3wZ9s1c0Q3Y2m4G6wQJt0iHq3R8b5H5l8w7wqN3b5s8Qw2Vv3gqQ8aJr4Xk1xK7w0q2kQ3h1bZc9uUj6Ucn3vQmZ7sU8Qd1cZ3t1i8h6kKk3jQW5Qb5sC5d9wqF2cF7YQF3X1s2mQdZb0rCqR4vR2Zx9gXyqk+vRr8Q1e2k9b6J9n3j0q3n0v4c6Qyqf9b1oZ2r9b9m7E1m2vC0gS0f8eWб7g2u8t0J3n9bCj9m8Qp0cZ8a0Hf0m9w0x3Kq7wTg5+o9C8u7zq7I1qQvQxw7V1U1eQxXrQAAAABJRU5ErkJggg==')}
 
     /* --- Hero --- */
     .hero{position:relative; padding:96px 0 40px; border-bottom:1px solid var(--line); background:
@@ -137,11 +141,23 @@
     .reveal{opacity:0; transform:translateY(12px); transition:600ms ease}
     .reveal-visible{opacity:1; transform:none}
 
+    /* --- Адаптив --- */
     @media (max-width:960px){
       .trust{grid-template-columns:repeat(2,minmax(0,1fr))}
       .grid.cols-2{grid-template-columns:1fr}
       .grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
       .footer-grid{grid-template-columns:1fr}
+      .menu{flex-wrap:wrap; gap:14px}
+    }
+    @media (max-width:640px){
+      .container{width:min(640px,94vw)}
+      .hero{padding:76px 0 28px}
+      .title{font-size:clamp(22px,9.5vw,36px)}
+      .subtitle{font-size:15px}
+      .trust{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:1fr}
+      .card{padding:18px; border-radius:16px}
+      .badge{display:none}
     }
 
     /* Уважение к reduce-motion */
@@ -244,7 +260,7 @@
         </div>
         <div class="card reveal">
           <div class="card-title">Технологии</div>
-          <div class="mono small">Python (aiogram 3.x, aiosqlite), APScheduler, YooKassa/Payme (интеграция), JSON, MarkdownV2</div>
+          <div class="mono small">Python (aiogram 3.x, aiosqlite), APScheduler, YooКassa/Payme (интеграция), JSON, MarkdownV2</div>
         </div>
       </div>
     </div>
@@ -348,7 +364,6 @@
         <div id="cv" class="card reveal">
           <div class="card-title">Резюме (PDF)</div>
           <p class="muted">Скачать полную версию резюме.</p>
-          <!-- Добавь файл в репозиторий по пути /assets/Komil_Sultonov_CV.pdf -->
           <a class="cta magnet" href="./assets/Султонов К. Г. (Growth Hacker_MarTech-специалист).pdf" download onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Скачать PDF</span></a>
         </div>
       </div>
@@ -401,18 +416,25 @@
     }
     function btnLeave(e){ e.currentTarget.style.transform='translate(0,0)'; }
 
-    // === Звёздная пыль на canvas ===
+    // === Звёздная пыль на canvas (адаптивная плотность) ===
     const cvs = document.getElementById('stars');
     const ctx = cvs.getContext('2d');
-    let W, H, stars = [];
-    const STAR_COUNT = 120; // баланс производительности и выразительности
+    let W, H, stars = [], STAR_COUNT = 120;
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+    function computeStarCount(){
+      const area = innerWidth * innerHeight; // px
+      // плотность звёзд и ограничения по количеству
+      const density = 0.00010; // чем больше, тем гуще
+      return Math.max(60, Math.min(140, Math.floor(area * density / (DPR*DPR))));
+    }
 
     function resize(){
       W = cvs.width  = Math.floor(innerWidth * DPR);
       H = cvs.height = Math.floor(innerHeight * DPR);
       cvs.style.width = innerWidth+'px';
       cvs.style.height = innerHeight+'px';
+      STAR_COUNT = computeStarCount();
       stars = Array.from({length:STAR_COUNT}, ()=>({
         x: Math.random()*W,
         y: Math.random()*H,
