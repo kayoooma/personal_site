@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Комил Султонов — Growth Marketer / MarTech</title>
+  <meta name="description" content="Growth Marketer / MarTech-специалист. 5+ лет опыта. Автоматизация маркетинга, ИИ, 3D/Motion, Telegram‑боты. Увеличение вовлеченности +30%, снижение CPL −15%, рост конверсии +18%." />
+  <meta name="theme-color" content="#0b0d10" />
+  <meta property="og:title" content="Комил Султонов — Growth Marketer / MarTech" />
+  <meta property="og:description" content="Делаю цифры расти: рост, автоматизация, ИИ. +30% вовлеченность, −15% CPL, +18% конверсия." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0d10;        /* глубокий тёмный фон */
+      --panel:#0f1216;     /* матовая панель */
+      --muted:#7a8596;     /* приглушённый текст */
+      --text:#e7eaf0;      /* основной текст */
+      --line:#1a1f26;      /* тонкая обводка */
+      --accent:#67e8f9;    /* сдержанный акцент (cyan 300) */
+      --accent-2:#86efac;  /* доп. акцент (emerald 300) */
+      --radius:20px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.02) inset; /* мягкая тень, матовая */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+      line-height:1.6; letter-spacing:.2px;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{width:min(1120px, 92vw); margin:0 auto}
+
+    /* --- Глобальные элементы UI --- */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(120%) blur(8px); background:linear-gradient(to bottom, rgba(11,13,16,.85), rgba(11,13,16,.65)); border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .logo{display:flex; gap:12px; align-items:center}
+    .badge{display:inline-flex; align-items:center; gap:6px; font:600 12px/1 Inter; letter-spacing:.6px; text-transform:uppercase; color:var(--muted); background: #0d1116; border:1px solid var(--line); padding:6px 10px; border-radius:999px}
+    .menu{display:flex; gap:22px; align-items:center}
+    .menu a{color:var(--muted); font-weight:500; opacity:.9}
+    .menu a:hover{color:var(--text)}
+    .cta{--pad:14px 18px; display:inline-flex; align-items:center; gap:10px; padding:var(--pad); border-radius:14px; border:1px solid var(--line); background:linear-gradient(180deg,#0f1317,#0c0f13); box-shadow:var(--shadow); position:relative; overflow:hidden}
+    .cta span{font-weight:600}
+    .cta::after{content:""; position:absolute; inset:0; background:radial-gradient(600px 160px at var(--mx,50%) -20%, rgba(103,232,249,.10), transparent 60%); transition:200ms ease}
+    .cta:hover{transform:translateY(-1px)}
+    .cta .dot{width:9px; height:9px; background:var(--accent); border-radius:50%; box-shadow:0 0 18px rgba(103,232,249,.75)}
+
+    /* --- Фоновые орбы (очень приглушённые) --- */
+    .orbs{position:fixed; inset:0; pointer-events:none; z-index:-1; overflow:hidden}
+    .orb{position:absolute; width:520px; height:520px; border-radius:50%; filter:blur(60px) saturate(120%); opacity:.055}
+    .orb.c1{background:radial-gradient(circle at 30% 30%, #67e8f9, transparent 55%); left:-140px; top:-120px}
+    .orb.c2{background:radial-gradient(circle at 70% 70%, #86efac, transparent 55%); right:-120px; bottom:-140px}
+
+    /* --- Геро‑экран --- */
+    .hero{position:relative; padding:96px 0 40px; border-bottom:1px solid var(--line); background:
+      linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 14%),
+      linear-gradient(0deg, rgba(255,255,255,.015), rgba(255,255,255,0) 30%),
+      var(--bg);
+    }
+    .hero .lead{display:inline-block; color:var(--muted); font-weight:500; letter-spacing:.35px}
+    .title{font-weight:800; font-size:clamp(28px, 6vw, 56px); line-height:1.1; margin:.25em 0 .35em}
+    .subtitle{font-size:clamp(16px, 2.2vw, 20px); color:#c7cbd4; max-width:860px}
+    .hero-cta{display:flex; flex-wrap:wrap; gap:14px; margin:26px 0 0}
+    .ghost{padding:14px 18px; border-radius:14px; border:1px dashed #2a323d; color:#cbd5e1}
+
+    /* --- Полоса доверия/метрик --- */
+    .trust{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:34px 0 0}
+    .kpi{background:linear-gradient(180deg,#0d1014,#0b0e12); border:1px solid var(--line); border-radius:16px; padding:18px 18px; box-shadow:var(--shadow)}
+    .kpi .num{font:700 clamp(22px,3.2vw,28px)/1 Inter}
+    .kpi .cap{color:var(--muted); font-size:13px; letter-spacing:.25px}
+
+    /* --- Карточки (матовые) --- */
+    .section{padding:70px 0; border-bottom:1px solid var(--line)}
+    .h2{font:700 clamp(22px, 3.4vw, 32px)/1.2 Inter; margin:0 0 16px}
+    .p{color:#cbd1db; max-width:860px}
+    .grid{display:grid; gap:18px}
+    .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:linear-gradient(180deg,#0f1216,#0c0f13); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+    .card .card-title{font-weight:650; font-size:18px}
+    .mono{font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .muted{color:var(--muted)}
+
+    /* --- Линии времени и списки --- */
+    .timeline{position:relative; padding-left:22px}
+    .timeline::before{content:""; position:absolute; left:8px; top:6px; bottom:6px; width:1px; background:linear-gradient(180deg,transparent,var(--line),transparent)}
+    .tl-item{position:relative; padding:12px 0 12px 14px}
+    .tl-item::before{content:""; position:absolute; left:-6px; top:18px; width:10px; height:10px; background:var(--accent); border-radius:50%; box-shadow:0 0 0 4px rgba(103,232,249,.12)}
+
+    /* --- Кнопки — магнит --- */
+    .magnet{transition:transform .2s ease}
+
+    /* --- Футер --- */
+    footer{padding:50px 0}
+    .footer-grid{display:grid; gap:18px; grid-template-columns:1.5fr 1fr}
+    .small{font-size:13px; color:var(--muted)}
+
+    /* --- Анимации появления --- */
+    .reveal{opacity:0; transform:translateY(12px); transition:600ms ease}
+    .reveal-visible{opacity:1; transform:none}
+
+    /* --- Адаптив --- */
+    @media (max-width:960px){
+      .trust{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid.cols-2{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .footer-grid{grid-template-columns:1fr}
+    }
+
+    /* --- Слой приглушённого шума (матовая текстура) --- */
+    .grain{position:fixed; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:soft-light; background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsSAAALEgHS3X78AAABcElEQVR4nO2bvU7DQBCEZ6sQ4h2gE0w6kJ3gC5wBq0C4h+0K0FQyQvXgqQn9dD3Wg6gA2o8p9l3Zb3iV1lQe2k9nY8mQy6KQe3k+z9wE5rJwq7mXQqVwHXL4l0k6l9GQm3v0q0d7Q8q2N3wZ9s1c0Q3Y2m4G6wQJt0iHq3R8b5H5l8w7wqN3b5s8Qw2Vv3gqQ8aJr4Xk1xK7w0q2kQ3h1bZc9uUj6Ucn3vQmZ7sU8Qd1cZ3t1i8h6kKk3jQW5Qb5sC5d9wqF2cF7YQF3X1s2mQdZb0rCqR4vR2Zx9gXyqk+vRr8Q1e2k9b6J9n3j0q3n0v4c6Qyqf9b1oZ2r9b9m7E1m2vC0gS0f8eWb7g2u8t0J3n9bCj9m8Qp0cZ8a0Hf0m9w0x3Kq7wTg5+o9C8u7zq7I1qQvQxw7V1U1eQxXrQAAAABJRU5ErkJggg==')}
+  </style>
+</head>
+<body>
+  <!-- Мягкие, едва заметные орбы на фоне -->
+  <div class="orbs" aria-hidden="true">
+    <div class="orb c1"></div>
+    <div class="orb c2"></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Навбар -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="logo" aria-label="На главную">
+        <svg width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="6" y="6" width="36" height="36" rx="12" fill="#0c1116" stroke="var(--line)"/><path d="M16 30l8-12 8 12" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <strong>Комил Султонов</strong>
+        <span class="badge">Growth • MarTech</span>
+      </a>
+      <div class="menu">
+        <a href="#services">Сервисы</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#skills">Навыки</a>
+        <a href="#experience">Опыт</a>
+        <a href="#contacts">Контакты</a>
+        <a class="cta magnet" href="#contacts" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Связаться</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="top" class="hero">
+    <div class="container">
+      <span class="lead">Ташкент • Узбекистан • Доступен к перездам и редким командировкам</span>
+      <h1 class="title">Growth Marketer / MarTech‑специалист</h1>
+      <p class="subtitle">Делаю цифры расти с помощью <strong>аналитики</strong>, <strong>гипотез</strong>, <strong>автоматизации на ИИ и коде</strong>. Комбинирую маркетинг, продакшен и разработку (Python, Telegram‑боты, интеграции) — от идеи до стабильно работающего продукта.</p>
+      <div class="hero-cta">
+        <a class="cta magnet" href="https://t.me/+F8VMvrm4QmYzOWNi" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)">
+          <span class="dot"></span><span>Портфолио в Telegram</span>
+        </a>
+        <a class="ghost" href="#cv">Скачать резюме (PDF)</a>
+      </div>
+
+      <!-- Метрики доверия -->
+      <div class="trust">
+        <div class="kpi reveal"><div class="num">5+ лет</div><div class="cap">Опыт в маркетинге и продакшене</div></div>
+        <div class="kpi reveal"><div class="num">+30%</div><div class="cap">Рост вовлеченности за 3 мес.</div></div>
+        <div class="kpi reveal"><div class="num">−15%</div><div class="cap">Снижение стоимости лида</div></div>
+        <div class="kpi reveal"><div class="num">+18%</div><div class="cap">Рост конверсии</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Сервисы -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="h2">Чем помогу бизнесу</h2>
+      <p class="p">Фокус на результате: модели роста, автоматизация воронок и продакшен контента, который работает на метрики. Ниже — три направления, где я приношу максимальную ценность.</p>
+      <div class="grid cols-3" style="margin-top:18px">
+        <article class="card reveal">
+          <div class="card-title">Growth‑маркетинг</div>
+          <ul class="muted"><li>Аналитика и приоритизация гипотез</li><li>Медиа‑планы и запуск кампаний</li><li>Оптимизация CPL/CPA/ROAS</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="card-title">MarTech & Автоматизация</div>
+          <ul class="muted"><li>Telegram‑боты, платежи, CRM</li><li>Скрипты на Python, интеграции</li><li>Нейросети в продакшене и продажах</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="card-title">Контент & Продакшен</div>
+          <ul class="muted"><li>3D/Motion (Blender, AE)</li><li>Сторис/ролики, пост‑продакшен</li><li>Креативы под перфоманс</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Кейс / Продукт -->
+  <section id="cases" class="section">
+    <div class="container">
+      <h2 class="h2">Свой продукт: WatchWithNoHands</h2>
+      <p class="p">IT‑стартап: подписочная система, реферальная программа и Telegram‑бот как интерфейс. От идеи до реализации: архитектура БД, оптимизация кода, маркетинг, тестирование. Сейчас продукт готов на ~80% и продолжает развиваться.</p>
+      <div class="grid cols-2" style="margin-top:18px">
+        <div class="card reveal">
+          <div class="card-title">Что сделал</div>
+          <ul class="muted">
+            <li>Спроектировал и собрал двухботовую систему (основной + саппорт)</li>
+            <li>Запустил подписки, управление устройствами и рефералку</li>
+            <li>Автоматизировал бэк‑процессы (APScheduler, обменники, базы)</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <div class="card-title">Технологии</div>
+          <div class="mono small">Python (aiogram 3.x, aiosqlite), APScheduler, YooKassa/Payme (интеграция), JSON, MarkdownV2</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Навыки -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="h2">Навыки и инструменты</h2>
+      <div class="grid cols-3" style="margin-top:8px">
+        <div class="card reveal">
+          <div class="card-title">Маркетинг</div>
+          <p class="muted">SMM, таргетинг, контекст, копирайтинг, affiliate, вирусный маркетинг, аналитика.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-title">MarTech / Code</div>
+          <p class="muted">Python, Telegram, автоматизация, оптимизация кода, ChatGPT, Stable Diffusion.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-title">Продакшен</div>
+          <p class="muted">Blender (3D), After Effects, Premiere Pro, Photoshop, брендинг, фирменный стиль.</p>
+        </div>
+      </div>
+      <div class="card reveal" style="margin-top:18px">
+        <div class="card-title">Языки</div>
+        <p class="muted">Русский — родной · Узбекский — C1 · Английский — B2 (IELTS 6.5)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Опыт работы -->
+  <section id="experience" class="section">
+    <div class="container">
+      <h2 class="h2">Опыт</h2>
+      <div class="grid cols-2" style="margin-top:6px">
+        <div class="card reveal">
+          <div class="card-title">WatchWithNoHands — Владелец IT‑стартапа</div>
+          <p class="small muted">Июнь 2024 — н.в. · Ташкент</p>
+          <ul class="muted"><li>Разработка продукта от идеи до релиза</li><li>Подписки, рефералка, Telegram‑бот, БД, маркетинг</li></ul>
+        </div>
+        <div class="card reveal">
+          <div class="card-title">AGAT Credit — Ведущий SMM / маркетолог</div>
+          <p class="small muted">Сентябрь 2023 — Июнь 2024 · Ташкент</p>
+          <ul class="muted">
+            <li>+30% вовлеченность за 3 мес.</li>
+            <li>−15% CPL за счёт медиа‑планов и оптимизаций</li>
+            <li>+18% конверсия, −12% CPC</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <div class="card-title">Fiverr — 3D Motion Designer</div>
+          <p class="small muted">Июнь 2020 — Август 2023</p>
+          <p class="muted">Коммерческие 3D‑анимации (Румыния, Индия, Нигерия, США). Blender, персонажи, продукты, логотипы.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-title">Mirvalino Industries — SMM‑менеджер</div>
+          <p class="small muted">Октябрь 2021 — Май 2023</p>
+          <p class="muted">Контент‑план, креативы, таргет, рынок, бухгалтерия.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Образование и сертификаты -->
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Образование и сертификаты</h2>
+      <div class="grid cols-2" style="margin-top:10px">
+        <div class="card reveal">
+          <div class="card-title">Национальный университет им. Мирзо Улугбека</div>
+          <p class="muted">Экономика / HR · Ожидаемый выпуск: 2026</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-title">Ключевые сертификаты</div>
+          <ul class="muted">
+            <li>PMI: Fundamentals of Predictive Project Management (2024)</li>
+            <li>IELTS 6.5 (2025)</li>
+            <li>Udemy: Google Ads для вашего бизнеса</li>
+            <li>Skillshare: Advanced 3D Animation; Product Animation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contacts" class="section">
+    <div class="container">
+      <h2 class="h2">Контакты</h2>
+      <div class="grid cols-2" style="margin-top:10px">
+        <div class="card reveal">
+          <div class="card-title">Связаться со мной</div>
+          <p class="muted">Готов обсудить задачи и быстро накидать гипотезы роста под ваши метрики.</p>
+          <div style="display:grid; gap:10px; margin-top:14px">
+            <a class="cta magnet" href="https://t.me/+F8VMvrm4QmYzOWNi" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Написать в Telegram</span></a>
+            <a class="ghost" href="mailto:kamasultanov8@gmail.com">kamasultanov8@gmail.com</a>
+            <a class="ghost" href="tel:+998881116612">+998 (88) 111‑66‑12</a>
+            <p class="small muted">Ташкент, Узбекистан</p>
+          </div>
+        </div>
+        <div id="cv" class="card reveal">
+          <div class="card-title">Резюме (PDF)</div>
+          <p class="muted">Скачать полную версию резюме.</p>
+          <!-- Замените href на реальный URL вашего PDF (например, GitHub Pages / облако) -->
+          <a class="cta magnet" href="#" download onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Скачать PDF</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container">
+    <div class="footer-grid">
+      <div>
+        <strong>Комил Султонов</strong>
+        <p class="small">Growth Marketer / MarTech‑специалист. Комбинирую маркетинг, продакшен и код, чтобы ускорять рост бизнеса.</p>
+      </div>
+      <div>
+        <p class="small">© <span id="year"></span>. Сделано аккуратно в тёмных тонах и матовых материалах.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Структурированные данные -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Комил Султонов",
+    "jobTitle": "Growth Marketer / MarTech-специалист",
+    "telephone": "+998881116612",
+    "email": "mailto:kamasultanov8@gmail.com",
+    "address": {"@type":"PostalAddress","addressLocality":"Ташкент","addressCountry":"UZ"},
+    "url": "",
+    "sameAs": ["https://t.me/+F8VMvrm4QmYzOWNi"]
+  }
+  </script>
+
+  <script>
+    // Обновляем год в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if (e.isIntersecting) e.target.classList.add('reveal-visible'); });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Магнитная кнопка / подсветка курсора на CTA
+    function btnHover(e){
+      const b = e.currentTarget; const r = b.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width*100; b.style.setProperty('--mx', x+'%');
+      const dx = (e.clientX - (r.left + r.width/2))/8; const dy = (e.clientY - (r.top + r.height/2))/8;
+      b.style.transform = `translate(${dx}px, ${dy}px)`;
+    }
+    function btnLeave(e){ e.currentTarget.style.transform='translate(0,0)'; }
+
+    // Лёгкий параллакс фона в hero (очень приглушённый)
+    const hero = document.querySelector('.hero');
+    window.addEventListener('mousemove', (ev)=>{
+      const x = (ev.clientX / window.innerWidth - .5) * 6; // градусы
+      const y = (ev.clientY / window.innerHeight - .5) * 6;
+      hero.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
+    });
+  </script>
+</body>
+</html>
