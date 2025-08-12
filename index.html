@@ -9,7 +9,7 @@
   <meta property="og:title" content="Комил Султонов — Growth Marketer / MarTech" />
   <meta property="og:description" content="Рост метрик через аналитику, гипотезы и автоматизацию на ИИ и коде. +30% вовлеченность, −15% CPL, +18% конверсия." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="" />
+  <meta property="og:image" content="./assets/portrait.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -157,11 +157,20 @@
       linear-gradient(0deg, rgba(255,255,255,.015), rgba(255,255,255,0) 30%),
       var(--bg)}
     .hero::after{content:""; position:absolute; inset:-10px; pointer-events:none; border-radius:0 0 40px 40px; z-index:0; background:radial-gradient(120% 80% at 50% 10%, transparent 30%, rgba(0,0,0,.28) 100%)}
+    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:center}
     .hero .lead{display:inline-block; color:var(--muted); font-weight:500; letter-spacing:.35px}
     .title{position:relative; z-index:1; font-weight:800; font-size:clamp(28px, 6vw, 56px); line-height:1.1; margin:.25em 0 .35em}
     .subtitle{position:relative; z-index:1; font-size:clamp(16px, 2.2vw, 20px); color:#c7cbd4; max-width:860px}
     .hero-cta{position:relative; z-index:1; display:flex; flex-wrap:wrap; gap:14px; margin:26px 0 0}
     .ghost{padding:14px 18px; border-radius:14px; border:1px dashed color-mix(in oklab, var(--line) 100%, transparent); color:color-mix(in oklab, var(--text) 84%, transparent)}
+
+    /* Портрет */
+    .portrait-card{position:relative; border:1px solid var(--line); border-radius:24px; padding:10px; background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 94%, transparent)); box-shadow:var(--shadow)}
+    .portrait-wrap{position:relative; overflow:hidden; border-radius:16px; aspect-ratio: 4 / 5; background:#0b0d10}
+    .portrait{width:100%; height:100%; object-fit:cover; filter:saturate(108%)}
+    .portrait-card::after{content:""; position:absolute; inset:-1px; border-radius:24px; pointer-events:none; background:linear-gradient(180deg, color-mix(in oklab, var(--accent) 12%, transparent), transparent 40%, color-mix(in oklab, var(--accent-2) 10%, transparent) 80%)}
+    .portrait-badge{position:absolute; left:14px; bottom:14px; right:14px; display:flex; justify-content:space-between; gap:10px; align-items:center; padding:8px 12px; border-radius:12px; border:1px solid var(--line); backdrop-filter:blur(6px) saturate(120%); background:color-mix(in oklab, var(--panel) 76%, transparent)}
+    .portrait-badge .txt{font:600 12px/1 Inter; letter-spacing:.3px; color:var(--muted)}
 
     .trust{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:34px 0 0}
     .kpi{background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 96%, transparent), color-mix(in oklab, var(--panel) 100%, transparent)); border:1px solid var(--line); border-radius:16px; padding:18px 18px; box-shadow:var(--shadow)}
@@ -196,6 +205,7 @@
     .reveal-visible{opacity:1; transform:none}
 
     /* Мобильные мелочи */
+    @media (max-width:860px){ .hero-grid{grid-template-columns:1fr; gap:18px} }
     @media (max-width:640px){ .container{width:min(640px,94vw)} .hero{padding:76px 0 28px} .title{font-size:clamp(22px,9.5vw,36px)} .subtitle{font-size:15px} .card{padding:18px; border-radius:16px} }
 
     /* Accessibility: reduce-motion */
@@ -245,24 +255,34 @@
 
   <!-- Hero -->
   <header id="top" class="hero">
-    <div class="container">
-      <span class="lead">Ташкент • Узбекистан • Доступен к переездам и редким командировкам</span>
-      <h1 class="title">Growth Marketer / MarTech‑специалист</h1>
-      <p class="subtitle">Увеличиваю ключевые метрики за счёт <strong>аналитики</strong>, системной работы с <strong>гипотезами</strong> и <strong>автоматизации на ИИ и коде</strong>. Совмещаю маркетинг, продакшен и разработку (Python, Telegram‑боты, интеграции) — от идеи до стабильного продукта.</p>
-      <div class="hero-cta">
-        <a class="cta magnet" href="https://t.me/+F8VMvrm4QmYzOWNi" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)">
-          <span class="dot"></span><span>Портфолио в Telegram</span>
-        </a>
-        <a class="ghost" href="#cv">Скачать резюме (PDF)</a>
+    <div class="container hero-grid">
+      <div>
+        <span class="lead">Ташкент • Узбекистан • Доступен к переездам и редким командировкам</span>
+        <h1 class="title">Growth Marketer / MarTech‑специалист</h1>
+        <p class="subtitle">Увеличиваю ключевые метрики за счёт <strong>аналитики</strong>, системной работы с <strong>гипотезами</strong> и <strong>автоматизации на ИИ и коде</strong>. Совмещаю маркетинг, продакшен и разработку (Python, Telegram‑боты, интеграции) — от идеи до стабильного продукта.</p>
+        <div class="hero-cta">
+          <a class="cta magnet" href="https://t.me/+F8VMvrm4QmYzOWNi" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)">
+            <span class="dot"></span><span>Портфолио в Telegram</span>
+          </a>
+          <a class="ghost" href="#cv">Скачать резюме (PDF)</a>
+        </div>
+
+        <!-- KPI доверия -->
+        <div class="trust">
+          <div class="kpi reveal"><div class="num">5+ лет</div><div class="cap">Опыт в маркетинге и продакшене</div></div>
+          <div class="kpi reveal"><div class="num">+30%</div><div class="cap">Рост вовлеченности за 3 мес.</div></div>
+          <div class="kpi reveal"><div class="num">−15%</div><div class="cap">Снижение стоимости лида</div></div>
+          <div class="kpi reveal"><div class="num">+18%</div><div class="cap">Рост конверсии</div></div>
+        </div>
       </div>
 
-      <!-- KPI доверия -->
-      <div class="trust">
-        <div class="kpi reveal"><div class="num">5+ лет</div><div class="cap">Опыт в маркетинге и продакшене</div></div>
-        <div class="kpi reveal"><div class="num">+30%</div><div class="cap">Рост вовлеченности за 3 мес.</div></div>
-        <div class="kpi reveal"><div class="num">−15%</div><div class="cap">Снижение стоимости лида</div></div>
-        <div class="kpi reveal"><div class="num">+18%</div><div class="cap">Рост конверсии</div></div>
-      </div>
+      <!-- ПОРТРЕТ -->
+      <aside class="portrait-card reveal" aria-label="Портрет">
+        <div class="portrait-wrap">
+          <img class="portrait" src="./assets/portrait.jpg" alt="Комил Султонов" loading="lazy" onerror="this.closest('.portrait-card').style.display='none'">
+          <div class="portrait-badge"><span class="txt">Комил Султонов</span><span class="txt">Open to projects</span></div>
+        </div>
+      </aside>
     </div>
   </header>
 
