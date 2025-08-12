@@ -101,6 +101,21 @@
     }
     html[data-palette="silver-light"] .cta:hover::before, html[data-palette="silver-dark"] .cta:hover::before{ left:120%; }
 
+    /* ---- Fix: контраст текста на Black+Silver ---- */
+    html[data-palette="silver-dark"] .cta, html[data-palette="silver-dark"] .cta span{ color:#0b1220 !important; text-shadow:none; }
+
+    /* ---- Fix: читабельность в White+Silver ---- */
+    html[data-palette="silver-light"] .subtitle{ color:#1f2937; opacity:0.92; }
+    html[data-palette="silver-light"] .p{ color:#334155; }
+    /* Чуть темнее подписи */
+    html[data-palette="silver-light"] .label{ color:#475569; }
+    /* Менее белёный hero, без лишнего «тумана» */
+    html[data-palette="silver-light"] .hero{ background:
+      radial-gradient(1200px 380px at 10% -10%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 65%),
+      radial-gradient(900px 300px at 110% 110%, color-mix(in oklab, var(--accent-2) 12%, transparent), transparent 60%),
+      var(--bg);
+    }
+
     /* Бургер */
     .menu-toggle{display:none; background:transparent; border:1px solid var(--line); border-radius:12px; padding:8px 12px; color:var(--muted)}
     .menu-toggle svg{display:block}
