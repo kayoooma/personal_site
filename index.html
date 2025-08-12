@@ -601,7 +601,7 @@
         <div id="cv" class="card reveal">
           <div class="card-title">Резюме (PDF)</div>
           <p class="p">Скачать полную версию резюме.</p>
-          <a class="cta magnet" href="./assets/resume.pdf" download onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Скачать PDF</span></a>
+          <a class="cta magnet" id="resumeLink" href="./assets/Султонов К. Г. (Growth Hacker_MarTech-специалист).pdf" type="application/pdf" download onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Скачать PDF</span></a>
         </div>
       </div>
     </div>
@@ -706,6 +706,20 @@
     // ===== Хоткеи =====
     const gridLayer=document.querySelector('.gridfx'); let gridVisible=true; function cycleSelect(sel){ const i=sel.selectedIndex; sel.selectedIndex=(i+1)%sel.options.length; sel.dispatchEvent(new Event('change',{bubbles:true})); }
     document.addEventListener('keydown',(e)=>{ if(e.target.matches('input,textarea')) return; const k=e.key.toLowerCase(); if(k==='p'){ cycleSelect(paletteSelect);} else if(k==='f'){ cycleSelect(patternSelect);} else if(k==='g'){ gridVisible=!gridVisible; if(gridLayer) gridLayer.style.display=gridVisible?'block':'none'; } });
+
+    // ===== Резюме: проверка существования файла (fallback) =====
+    (async function ensureResume(){
+      const a = document.getElementById('resumeLink');
+      if(!a) return;
+      const primary = './assets/Султонов К. Г. (Growth Hacker_MarTech-специалист).pdf';
+      const fallback = './assets/resume.pdf';
+      try{
+        const r = await fetch(primary, {method:'HEAD'});
+        if(r && r.ok){ a.href = primary; return; }
+        const r2 = await fetch(fallback, {method:'HEAD'});
+        if(r2 && r2.ok){ a.href = fallback; }
+      }catch(err){ a.href = fallback; }
+    })();
   </script>
 </body>
 </html>
