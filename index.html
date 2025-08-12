@@ -275,7 +275,7 @@
     @media (max-width:540px){ .switcher{flex-direction:column; align-items:stretch} }
     /* Mobile: сместить переключатель правее и сделать компактнее, чтобы не задевал текст слева */
     @media (max-width:640px){
-      .switcher{ left:auto; right:calc(max(16px, env(safe-area-inset-right, 0px)) + 4px); bottom:calc(max(12px, env(safe-area-inset-bottom, 0px)) + 4px); width:min(260px, 60vw); padding:8px 10px; gap:8px }
+      .switcher{ left:auto; right:calc(max(12px, env(safe-area-inset-right, 0px)) + 2px); bottom:calc(max(12px, env(safe-area-inset-bottom, 0px)) + 2px); width:min(240px, 56vw); padding:8px 10px; gap:8px }
       .switcher .row{ justify-content:space-between }
       .switcher label{ margin-right:6px }
     }
@@ -695,6 +695,17 @@
 
     paletteSelect.addEventListener('change', e=> setPalette(e.target.value));
     patternSelect.addEventListener('change', e=> setPattern(e.target.value));
+
+    // Резерв места под фиксированный переключатель на мобилке,
+    // чтобы он не наезжал на контент слева/снизу
+    function reserveSpaceForSwitcher(){
+      const sw = document.querySelector('.switcher');
+      if(!sw) return;
+      const h = sw.offsetHeight + 24; // +зазор
+      document.body.style.paddingBottom = (innerWidth <= 640 ? h + 'px' : '');
+    }
+    reserveSpaceForSwitcher();
+    addEventListener('resize', reserveSpaceForSwitcher);
 
     // История: прогресс по линии и анимация баров
     const storyEl = document.getElementById('story');
