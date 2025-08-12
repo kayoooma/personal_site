@@ -225,6 +225,25 @@
     .mono{font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
     .muted{color:var(--muted)}
 
+    /* История (таймлайн) */
+    .story .wrap{display:grid; grid-template-columns:1.2fr .8fr; gap:18px; align-items:start}
+    .story .lead{color:var(--muted)}
+    .timeline{position:relative; padding:14px 14px 14px 0}
+    .timeline::before{content:""; position:absolute; left:12px; top:14px; bottom:14px; width:2px; background:linear-gradient(180deg, color-mix(in oklab, var(--accent) 30%, transparent), color-mix(in oklab, var(--accent-2) 30%, transparent)); opacity:.45}
+    #storyProgress{position:absolute; left:12px; top:14px; width:2px; height:0%; background:linear-gradient(180deg, var(--accent), var(--accent-2)); border-radius:2px; box-shadow:0 0 14px color-mix(in oklab, var(--accent) 40%, transparent)}
+    .milestone{position:relative; margin:12px 0 12px 28px; padding:14px 16px; border:1px dashed var(--line); border-radius:14px; background:color-mix(in oklab, var(--panel) 96%, transparent)}
+    .milestone::before{content:""; position:absolute; left:-26px; top:18px; width:12px; height:12px; border-radius:50%; background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent)}
+    .milestone .when{font:600 12px/1.1 Inter; color:var(--muted); letter-spacing:.3px}
+    .milestone .what{font-weight:650; margin:4px 0}
+    .milestone .desc{color:#cbd1db}
+    .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
+    .chip{font:600 11px/1 Inter; letter-spacing:.3px; padding:6px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); background:color-mix(in oklab, var(--panel) 92%, transparent)}
+    .bars{display:grid; gap:10px}
+    .bar{height:10px; border-radius:999px; border:1px solid var(--line); background:color-mix(in oklab, var(--panel) 90%, transparent); overflow:hidden}
+    .bar i{display:block; height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--accent-2)); transition:width 900ms ease}
+    .story-cta{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:14px}
+    @media (max-width:900px){ .story .wrap{grid-template-columns:1fr} }
+
     /* Формы / интерактив для LAB */
     .field{display:grid; gap:6px; margin:10px 0}
     .label{font-size:12px; color:var(--muted)}
@@ -283,6 +302,7 @@
         <a href="#cases" onclick="closeMenu()">Кейсы</a>
         <a href="#skills" onclick="closeMenu()">Навыки</a>
         <a href="#experience" onclick="closeMenu()">Опыт</a>
+        <a href="#story" onclick="closeMenu()">История</a>
         <a href="#lab" onclick="closeMenu()">Лаб</a>
         <a href="#contacts" onclick="closeMenu()">Контакты</a>
         <a class="cta magnet" href="#contacts" onclick="closeMenu()" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Связаться</span></a>
@@ -421,6 +441,64 @@
           <div class="card-title">Mirvalino Industries — SMM‑менеджер</div>
           <p class="small muted">Октябрь 2021 — Май 2023</p>
           <p class="muted">Контент‑план, креативы, таргет, рынок, бухгалтерия.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ИСТОРИЯ -->
+  <section id="story" class="section story">
+    <div class="container">
+      <h2 class="h2">Моя история: от внутренней дисциплины к продуктам</h2>
+      <p class="p">Десять лет пути в двух главах. Сначала — фундамент: работа с мышлением, принципы и предпринимательский взгляд. Затем — практика: маркетинг, автоматизация, продакшен и собственные продукты.</p>
+      <div class="wrap">
+        <div class="card reveal timeline">
+          <div id="storyProgress" aria-hidden="true"></div>
+
+          <div class="milestone">
+            <div class="when">Глава 1 · Первые 5 лет — Фундамент</div>
+            <div class="what">От хаоса к системе</div>
+            <div class="desc">Преодоление наследия прошлого, работа с дисциплиной и вниманием. Рождение личной философии и проверка её на прочность. Теоретическое изучение мира и бизнес‑моделей, чтобы понять, <em>как устроены механики роста</em>.</div>
+            <div class="chips"><span class="chip">ежедневные практики</span><span class="chip">принципы/рамки</span><span class="chip">бизнес‑книги → конспекты</span></div>
+          </div>
+
+          <div class="milestone">
+            <div class="when">Развилки</div>
+            <div class="what">Терял ориентиры — возвращался сильнее</div>
+            <div class="desc">Несколько раз приходилось останавливаться и переосмысливать курс. Каждый раз — возврат к базовым ценностям и обновлённый план действий.</div>
+            <div class="chips"><span class="chip">рефрейминг</span><span class="chip">антихрупкость</span><span class="chip">фокус</span></div>
+          </div>
+
+          <div class="milestone">
+            <div class="when">Глава 2 · Следующие 5 лет — Практика</div>
+            <div class="what">Применение знаний в реальном мире</div>
+            <div class="desc">Маркетинг, MarTech и автоматизация на Python. Продуктовые эксперименты, Telegram‑боты, продакшен. Рост метрик у клиентов и запуск собственного IT‑продукта.</div>
+            <div class="chips"><span class="chip">+30% вовлечённость</span><span class="chip">−15% CPL</span><span class="chip">+18% конверсия</span></div>
+          </div>
+
+          <div class="milestone">
+            <div class="when">Сегодня</div>
+            <div class="what">Чёткое видение и спокойная скорость</div>
+            <div class="desc">Умею соединять стратегию, креатив и код — от идеи до устойчивой системы роста.</div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-title">Визуально: чем я становился сильнее</div>
+          <div class="small muted" style="margin-bottom:8px">Шкалы заполняются при прокрутке</div>
+          <div class="bars">
+            <div class="label">Мышление и дисциплина</div>
+            <div class="bar"><i data-w="92"></i></div>
+            <div class="label" style="margin-top:8px">Бизнес‑мышление (модели/стратегии)</div>
+            <div class="bar"><i data-w="86"></i></div>
+            <div class="label" style="margin-top:8px">Практика (MarTech, продакшен)</div>
+            <div class="bar"><i data-w="94"></i></div>
+          </div>
+
+          <div class="story-cta">
+            <span class="muted">Готов применить эти навыки под ваши метрики.</span>
+            <a class="cta magnet" href="https://t.me/Ka_yooo_ma" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Обсудить задачу в Telegram</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -611,6 +689,28 @@
 
     paletteSelect.addEventListener('change', e=> setPalette(e.target.value));
     patternSelect.addEventListener('change', e=> setPattern(e.target.value));
+
+    // История: прогресс по линии и анимация баров
+    const storyEl = document.getElementById('story');
+    const storyProgress = document.getElementById('storyProgress');
+    function updateStoryProgress(){
+      if(!storyEl) return;
+      const r = storyEl.getBoundingClientRect();
+      const total = r.height + innerHeight; // вход + выход
+      const passed = Math.min(Math.max(innerHeight - r.top, 0), total);
+      const ratio = passed / total;
+      if(storyProgress) storyProgress.style.height = (ratio*100).toFixed(2) + '%';
+    }
+    updateStoryProgress();
+    addEventListener('scroll', updateStoryProgress, {passive:true});
+    addEventListener('resize', updateStoryProgress);
+
+    const barObserver = new IntersectionObserver((ents)=>{
+      ents.forEach(ent=>{
+        if(ent.isIntersecting){ const i = ent.target; const w = i.dataset.w || 0; requestAnimationFrame(()=> i.style.width = w+'%'); barObserver.unobserve(i); }
+      });
+    }, {threshold:.35});
+    document.querySelectorAll('#story .bar i[data-w]').forEach(i=>barObserver.observe(i));
 
     // ===== LAB логику подключаем =====
     // ROI
