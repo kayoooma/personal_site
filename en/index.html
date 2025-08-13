@@ -165,7 +165,7 @@
     @media (max-width:540px){ .switcher{flex-direction:column; align-items:stretch} }
     @media (max-width:640px){ .switcher{ right:calc(max(10px, env(safe-area-inset-right, 0px)) + 6px); bottom:calc(max(12px, env(safe-area-inset-bottom, 0px)) + 6px); width:clamp(200px, 45vw, 280px); padding:10px 12px; gap:10px } .switcher .row{ display:grid; grid-template-columns:max-content 1fr; column-gap:10px; align-items:center } .switcher .select{ width:100% } }
   </style>
-</head>
+  </head>
 <body>
   <div class="layer mesh" aria-hidden="true"></div>
   <canvas id="stars" class="layer" aria-hidden="true"></canvas>
@@ -433,7 +433,7 @@
 
     (function(){ const c=document.getElementById('stars'); if(!c) return; const ctx=c.getContext('2d'); let dpr=Math.min(devicePixelRatio||1,2);
       function resize(){ const w=innerWidth, h=innerHeight; c.width=w*dpr; c.height=h*dpr; c.style.width=w+'px'; c.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);} resize(); addEventListener('resize', resize);
-      const N=120; const S=Array.from({length:N},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:Math.random()*1.1+0.2,a:Math.random()*0.5+0.25,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28}));
+      const N=120; const S=Array.from({length:N},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:Math.random()*1.1+0.2,a:Math.random()*0.5+0.25,vx:(Math.random()-.5)*.42,vy:(Math.random()-.5)*.42}));
       (function tick(){ ctx.clearRect(0,0,innerWidth,innerHeight); ctx.fillStyle='#fff'; for(const p of S){ p.x+=p.vx; p.y+=p.vy; if(p.x<0)p.x+=innerWidth; if(p.x>innerWidth)p.x-=innerWidth; if(p.y<0)p.y+=innerHeight; if(p.y>innerHeight)p.y-=innerHeight; ctx.globalAlpha=p.a; ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,6.283); ctx.fill(); } ctx.globalAlpha=1; requestAnimationFrame(tick); })(); })();
 
     const storyEl=document.getElementById('story');
