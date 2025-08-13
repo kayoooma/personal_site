@@ -22,7 +22,7 @@
   <link rel="alternate" href="https://kayoooma.github.io/personal_site/" hreflang="ru" />
   <link rel="alternate" href="https://kayoooma.github.io/personal_site/en/" hreflang="en" />
   <link rel="alternate" href="https://kayoooma.github.io/personal_site/" hreflang="x-default" />
-  <!-- Favicon / tab icon -->
+  <!-- Favicon / tab icon (same as RU) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f8fafc'/%3E%3Cstop offset='0.5' stop-color='%23cbd5e1'/%3E%3Cstop offset='1' stop-color='%2394a3b8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='6' y='6' width='52' height='52' rx='14' fill='%230b0d12'/%3E%3Cpath d='M20 44 L44 20 M44 20 L44 34 M44 20 L30 20' stroke='url(%23g)' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f8fafc'/%3E%3Cstop offset='0.5' stop-color='%23cbd5e1'/%3E%3Cstop offset='1' stop-color='%2394a3b8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='6' y='6' width='52' height='52' rx='14' fill='%230b0d12'/%3E%3Cpath d='M20 44 L44 20 M44 20 L44 34 M44 20 L30 20' stroke='url(%23g)' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -165,22 +165,6 @@
     @media (max-width:540px){ .switcher{flex-direction:column; align-items:stretch} }
     @media (max-width:640px){ .switcher{ right:calc(max(10px, env(safe-area-inset-right, 0px)) + 6px); bottom:calc(max(12px, env(safe-area-inset-bottom, 0px)) + 6px); width:clamp(200px, 45vw, 280px); padding:10px 12px; gap:10px } .switcher .row{ display:grid; grid-template-columns:max-content 1fr; column-gap:10px; align-items:center } .switcher .select{ width:100% } }
   </style>
-
-  <!-- Analytics loader: Plausible + GA4 -->
-  <script>
-    window.ANALYTICS = { plausibleDomain: 'kayoooma.github.io', ga4: '' /* e.g., 'G-XXXXXXX' */ };
-    (function initAnalytics(){
-      if(window.ANALYTICS.plausibleDomain){
-        var s=document.createElement('script'); s.defer=true; s.setAttribute('data-domain', window.ANALYTICS.plausibleDomain); s.src='https://plausible.io/js/plausible.js'; document.head.appendChild(s);
-        window.plausible = window.plausible || function(){ (window.plausible.q = window.plausible.q || []).push(arguments) }
-      }
-      if(window.ANALYTICS.ga4){
-        var g=document.createElement('script'); g.async=true; g.src='https://www.googletagmanager.com/gtag/js?id='+window.ANALYTICS.ga4; document.head.appendChild(g);
-        window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)}; window.gtag=gtag; gtag('js', new Date()); gtag('config', window.ANALYTICS.ga4, { anonymize_ip:true });
-      }
-      window.trackEvent = function(name, props){ try{ if(window.plausible) plausible(name, {props: props||{}}); if(window.gtag) gtag('event', name, props||{}); }catch(e){} };
-    })();
-  </script>
 </head>
 <body>
   <div class="layer mesh" aria-hidden="true"></div>
@@ -253,7 +237,7 @@
       <div class="grid cols-3" style="margin-top:18px">
         <article class="card reveal"><div class="card-title">Growth Marketing</div><ul class="muted"><li>Analytics & hypothesis prioritization</li><li>Media plans & campaign launch</li><li>CPL/CPA/ROAS optimization</li></ul></article>
         <article class="card reveal"><div class="card-title">MarTech & Automation</div><ul class="muted"><li>Telegram bots, payments, CRM</li><li>Python scripts, integrations</li><li>AI in production & sales</li></ul></article>
-        <article class="card reveal"><div class="card-title">Content & Production</div><ul class="muted"><li>3D/Motion (Blender, AE)</li><li>Stories/reels, post-production</li><li>Creatives for performance</li></ul></article>
+        <article class="card reveal"><div class="card-title">Content & Production</div><ul class="muted"><li>3D/Motion (Blender, AE)</li><li>Stories/reels, post‑production</li><li>Creatives for performance</li></ul></article>
       </div>
     </div>
   </section>
@@ -263,7 +247,7 @@
       <h2 class="h2">Own product: WatchWithNoHands</h2>
       <p class="p">IT startup: subscription system, referral program and a Telegram bot as the main UI. From idea to implementation: DB architecture, code optimization, marketing, testing. Product is ~80% ready and evolving.</p>
       <div class="grid cols-2" style="margin-top:18px">
-        <div class="card reveal"><div class="card-title">What I built</div><ul class="muted"><li>Two-bot architecture (main + support)</li><li>Subscriptions, device management, referrals</li><li>Automated back-office (APScheduler, exchangers, DBs)</li></ul></div>
+        <div class="card reveal"><div class="card-title">What I built</div><ul class="muted"><li>Two‑bot architecture (main + support)</li><li>Subscriptions, device management, referrals</li><li>Automated back‑office (APScheduler, exchangers, DBs)</li></ul></div>
         <div class="card reveal"><div class="card-title">Tech</div><div class="mono small">Python (aiogram 3.x, aiosqlite), APScheduler, YooKassa/Payme integrations, JSON, MarkdownV2</div></div>
       </div>
     </div>
@@ -300,7 +284,7 @@
       <div class="wrap">
         <div class="card reveal timeline">
           <div id="storyProgress" aria-hidden="true"></div>
-          <div class="milestone"><div class="when">Chapter 1 · First 5 years — Foundation</div><div class="what">From chaos to system</div><div class="desc">Overcoming the past, building discipline and attention. Forming a personal philosophy and stress-testing it. Studying the world and business models to understand <em>how growth mechanics work</em>.</div><div class="chips"><span class="chip">daily practice</span><span class="chip">principles/frameworks</span><span class="chip">book notes</span></div></div>
+          <div class="milestone"><div class="when">Chapter 1 · First 5 years — Foundation</div><div class="what">From chaos to system</div><div class="desc">Overcoming the past, building discipline and attention. Forming a personal philosophy and stress‑testing it. Studying the world and business models to understand <em>how growth mechanics work</em>.</div><div class="chips"><span class="chip">daily practice</span><span class="chip">principles/frameworks</span><span class="chip">book notes</span></div></div>
           <div class="milestone"><div class="when">Crossroads</div><div class="what">Losing track — coming back stronger</div><div class="desc">Several times I had to pause and rethink the route. Each time — back to core values and an updated action plan.</div><div class="chips"><span class="chip">reframing</span><span class="chip">antifragility</span><span class="chip">focus</span></div></div>
           <div class="milestone"><div class="when">Chapter 2 · Next 5 years — Practice</div><div class="what">Applying knowledge in the real world</div><div class="desc">Marketing, MarTech and Python automation. Product experiments, Telegram bots, production. Metric growth for clients and my own IT product.</div><div class="chips"><span class="chip">+30% engagement</span><span class="chip">−15% CPL</span><span class="chip">+18% conversion</span></div></div>
           <div class="milestone"><div class="when">Today</div><div class="what">Clear vision, calm speed</div><div class="desc">I connect strategy, creativity and code — from idea to a resilient growth system.</div></div>
@@ -322,8 +306,7 @@
   <section id="lab" class="section">
     <div class="container">
       <h2 class="h2">Lab: growth tools</h2>
-      <p class="p">Three mini-tools I actually use. They show my thinking, prioritization approach, and the ability to build useful things in plain JS.</p>
-
+      <p class="p">Three mini‑tools I actually use. They show my thinking, prioritization approach, and the ability to build useful things in plain JS.</p>
       <div class="card reveal" style="margin-top:18px">
         <div class="card-title">1) Quick ROI calculator</div>
         <div class="row">
@@ -368,31 +351,6 @@
           <div class="stat"><span class="label">Δ B vs A</span><span id="abDiff" class="v">—</span></div>
         </div>
       </div>
-
-      <!-- 4) Vacancy Fit estimator -->
-      <div class="card reveal" style="margin-top:18px">
-        <div class="card-title">4) Vacancy Fit estimator</div>
-        <p class="small muted">Paste a vacancy and get an approximate match score to my profile. You can copy the summary or email it to me.</p>
-        <div class="row">
-          <label class="field" style="grid-column:1/-1"><span class="label">Job title</span><input id="fitTitle" class="input" placeholder="e.g., Growth Marketer / MarTech Engineer"/></label>
-          <label class="field" style="grid-column:1/-1"><span class="label">Requirements / description</span><textarea id="fitReqs" class="input" rows="4" placeholder="Paste the main responsibilities and requirements"></textarea></label>
-          <label class="field"><span class="label">Tech stack / tools</span><input id="fitStack" class="input" placeholder="python, telegram, crm, ai, analytics"/></label>
-          <label class="field"><span class="label">Seniority</span>
-            <select id="fitSeniority" class="input"><option>Junior</option><option selected>Middle</option><option>Senior</option><option>Lead</option></select>
-          </label>
-          <label class="field"><span class="label">Mode</span>
-            <select id="fitMode" class="input"><option selected>Remote</option><option>Hybrid</option><option>Onsite</option></select>
-          </label>
-          <label class="field"><span class="label">Location</span><input id="fitLocation" class="input" placeholder="City, Country"/></label>
-          <label class="field"><span class="label">Salary (optional)</span><input id="fitSalary" class="number" type="number" min="0" step="100" placeholder="USD/month"/></label>
-        </div>
-        <div class="row">
-          <button class="btn" type="button" id="fitCalc">Compute fit</button>
-          <button class="btn" type="button" id="fitCopy">Copy summary</button>
-          <a class="btn" id="fitEmail" href="#">Email me this vacancy</a>
-        </div>
-        <div id="fitOut" class="mono small" style="margin-top:12px"></div>
-      </div>
     </div>
   </section>
 
@@ -407,7 +365,7 @@
             <a class="cta magnet" href="https://t.me/Ka_yooo_ma" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Write on Telegram</span></a>
           </div>
           <div class="input" style="margin:8px 0">kamasultanov8@gmail.com</div>
-          <div class="input" style="margin:8px 0">+998 (88) 111-66-12</div>
+          <div class="input" style="margin:8px 0">+998 (88) 111‑66‑12</div>
           <div class="small muted" style="margin-top:6px">Tashkent, Uzbekistan</div>
         </div>
         <div id="cv" class="card reveal">
@@ -473,30 +431,6 @@
     function reserveSpaceForSwitcher(){ const sw=document.querySelector('.switcher'); if(!sw) return; const h=sw.offsetHeight+24; document.body.style.paddingBottom=(innerWidth<=640? h+'px' : ''); }
     reserveSpaceForSwitcher(); addEventListener('resize', reserveSpaceForSwitcher);
 
-    // === CTA mapping + UTM + tracking ===
-    (function(){
-      function setCtaLabels(){
-        document.querySelectorAll('a[href*="t.me"]').forEach(a=>{
-          const t=(a.textContent||'').toLowerCase();
-          if(t.includes('portfolio')) a.dataset.cta='hero-portfolio';
-          else if(t.includes('discuss')) a.dataset.cta='story-telegram';
-          else if(t.includes('write')) a.dataset.cta='contacts-telegram';
-          a.dataset.channel='telegram';
-        });
-      }
-      setCtaLabels();
-      const utm='utm_source=site&utm_medium=cta&utm_campaign=';
-      document.addEventListener('click', (e)=>{
-        const a=e.target.closest && e.target.closest('a'); if(!a) return;
-        if(a.dataset && a.dataset.channel==='telegram'){
-          try{ trackEvent('Lead: Telegram click', {cta:a.dataset.cta||'cta'}); }catch(err){}
-          try{ var u=new URL(a.href); if(!u.search) u.search='?'+utm+(a.dataset.cta||'cta'); a.href=u.toString(); }catch(err){}
-        }
-        if(a.id==='fitEmail'){ trackEvent('Lead: Vacancy submission', {}); }
-      }, {capture:true});
-    })();
-
-    // Background: stars
     (function(){ const c=document.getElementById('stars'); if(!c) return; const ctx=c.getContext('2d'); let dpr=Math.min(devicePixelRatio||1,2);
       function resize(){ const w=innerWidth, h=innerHeight; c.width=w*dpr; c.height=h*dpr; c.style.width=w+'px'; c.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);} resize(); addEventListener('resize', resize);
       const N=120; const S=Array.from({length:N},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:Math.random()*1.1+0.2,a:Math.random()*0.5+0.25,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28}));
@@ -509,27 +443,24 @@
     const barObserver=new IntersectionObserver((ents)=>{ ents.forEach(ent=>{ if(ent.isIntersecting){ const i=ent.target; const w=i.dataset.w||0; requestAnimationFrame(()=> i.style.width=w+'%'); barObserver.unobserve(i);} }); }, {threshold:.35});
     document.querySelectorAll('#story .bar i[data-w]').forEach(i=>barObserver.observe(i));
 
-    // ROI
     const ROI={ budget:document.getElementById('roiBudget'), cpl:document.getElementById('roiCpl'), cr:document.getElementById('roiCr'), aov:document.getElementById('roiAov'), margin:document.getElementById('roiMargin'), out:{ leads:document.getElementById('roiLeads'), sales:document.getElementById('roiSales'), rev:document.getElementById('roiRev'), profit:document.getElementById('roiProfit'), roi:document.getElementById('roiRoi') } };
     function fmt(n){ return isFinite(n)? Math.round(n).toLocaleString('en-US') : '—'; }
     function recalcROI(){ const budget=+ROI.budget.value||0; const cpl=Math.max(+ROI.cpl.value||0,1); const cr=Math.max(+ROI.cr.value||0,0)/100; const aov=+ROI.aov.value||0; const margin=Math.max(+ROI.margin.value||0,0)/100; const leads=budget/cpl; const sales=leads*cr; const revenue=sales*aov; const profit=revenue*margin-budget; const roi=budget>0? (profit/budget*100):0; ROI.out.leads.textContent=fmt(leads); ROI.out.sales.textContent=fmt(sales); ROI.out.rev.textContent=fmt(revenue); ROI.out.profit.textContent=fmt(profit); ROI.out.roi.textContent=(isFinite(roi)? roi.toFixed(1):'—')+'%'; }
     ;['input','change'].forEach(ev=>['roiBudget','roiCpl','roiCr','roiAov','roiMargin'].forEach(id=>document.getElementById(id).addEventListener(ev,recalcROI))); recalcROI();
 
-    // ICE
     const iceForm=document.getElementById('iceForm'); const iceList=document.getElementById('iceList'); const storeKey='iceItems';
     function loadICE(){ try{ return JSON.parse(localStorage.getItem(storeKey)||'[]'); }catch(e){ return [] } }
     function saveICE(items){ localStorage.setItem(storeKey, JSON.stringify(items)); }
     function renderICE(){ const items=loadICE().sort((a,b)=> b.score-a.score); if(!items.length){ iceList.innerHTML='<span class="muted">Empty for now. Add your first hypothesis above.</span>'; return;} iceList.innerHTML=items.map((it,i)=>`${i+1}. [${it.score.toFixed(1)}] ${it.name} — I:${it.i} · C:${it.c} · E:${it.e}`).join('<br>'); }
     if(iceForm){ iceForm.addEventListener('submit', (e)=>{ e.preventDefault(); const name=document.getElementById('iceName').value.trim(); const i=+document.getElementById('iceI').value||1; const c=+document.getElementById('iceC').value||1; const eVal=+document.getElementById('iceE').value||1; if(!name) return; const score=(i*c*eVal)/125*100; const items=loadICE(); items.push({name,i,c,e:eVal,score}); saveICE(items); renderICE(); e.target.reset(); document.getElementById('iceI').value=4; document.getElementById('iceC').value=3; document.getElementById('iceE').value=4; }); document.getElementById('iceReset').addEventListener('click', ()=>{ localStorage.removeItem(storeKey); renderICE(); }); renderICE(); }
 
-    // A/B
     const abVisitors=document.getElementById('abVisitors'); const abConvA=document.getElementById('abConvA'); const abUplift=document.getElementById('abUplift'); const abLeadsA=document.getElementById('abLeadsA'); const abLeadsB=document.getElementById('abLeadsB'); const abDiff=document.getElementById('abDiff');
     function recalcAB(){ const V=+abVisitors.value||0; const a=(+abConvA.value||0)/100; const u=(+abUplift.value||0)/100; const leadsA=V*a; const leadsB=V*a*(1+u); const diff=leadsB-leadsA; abLeadsA.textContent=fmt(leadsA); abLeadsB.textContent=fmt(leadsB); abDiff.textContent=(diff>=0?'+':'')+fmt(diff); }
     ;['input','change'].forEach(ev=>[abVisitors,abConvA,abUplift].forEach(el=> el && el.addEventListener(ev,recalcAB))); recalcAB();
 
-    // Vacancy Fit (logic lives above in CTA block)
+    const gridLayer=document.querySelector('.gridfx'); let gridVisible=true; function cycleSelect(sel){ const i=sel.selectedIndex; sel.selectedIndex=(i+1)%sel.options.length; sel.dispatchEvent(new Event('change',{bubbles:true})); }
+    document.addEventListener('keydown',(e)=>{ if(e.target.matches('input,textarea')) return; const k=e.key.toLowerCase(); if(k==='p'){ cycleSelect(paletteSelect);} else if(k==='f'){ cycleSelect(patternSelect);} else if(k==='g'){ gridVisible=!gridVisible; if(gridLayer) gridLayer.style.display=gridVisible?'block':'none'; } });
 
-    // Resume link fallback
     (async function ensureResume(){ const a=document.getElementById('resumeLink'); if(!a) return; const primary='../assets/Султонов К. Г. (Growth Hacker_MarTech-специалист).pdf'; const fallback='../assets/resume.pdf'; try{ const r=await fetch(primary,{method:'HEAD'}); if(r&&r.ok){ a.href=primary; return;} const r2=await fetch(fallback,{method:'HEAD'}); if(r2&&r2.ok){ a.href=fallback; } }catch(err){ a.href=fallback; } })();
   </script>
 </body>
