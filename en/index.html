@@ -211,14 +211,17 @@
     .scroll-top{ position:fixed; right:16px; bottom:16px; border:none; border-radius:12px; padding:10px; background:var(--panel); border:1px solid var(--line); color:var(--text); box-shadow: var(--shadow); cursor:pointer; opacity:0; visibility:hidden; transform:translateY(8px); transition: opacity .18s ease, transform .18s ease, visibility .18s; z-index:95; }
     .scroll-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
     .scroll-top:hover{ filter:brightness(1.1) }
-  /* Session theme tip */
-    .session-tip{ position:fixed; right:16px; z-index:96; display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 92%, transparent)); box-shadow:var(--shadow); transform:translateY(10px) scale(.98); opacity:0; visibility:hidden; transition: opacity .32s cubic-bezier(.2,.8,.2,1), transform .32s cubic-bezier(.2,.8,.2,1); will-change: opacity, transform; max-width:420px; bottom:calc(16px + 92px); }
-    .session-tip.show{ opacity:1; visibility:visible; transform:translateY(0) scale(1); animation: tipIn .38s cubic-bezier(.2,.8,.2,1) both; }
-    .session-tip.hiding{ opacity:0; transform:translateY(8px) scale(.98); visibility:visible; }
-    .session-tip .txt{ font-size:14px; color:var(--muted); }
+
+    /* ===== Session theme tip — fully rebuilt ===== */
+    .session-tip{ position:fixed; right:16px; z-index:96; display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 92%, transparent)); box-shadow:var(--shadow); max-width:420px; 
+      bottom:calc(16px + var(--switcher-h, 92px));
+      transform:translateY(8px) scale(.98); opacity:0; pointer-events:none; 
+      transition:opacity .28s cubic-bezier(.2,.8,.2,1), transform .28s cubic-bezier(.2,.8,.2,1); will-change:opacity, transform; }
+    .session-tip.is-visible{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+    .session-tip.is-exiting{ opacity:0; transform:translateY(8px) scale(.98); pointer-events:none; }
+    .session-tip .txt{ font-size:14px; color:var(--muted); display:flex; align-items:center; gap:6px; }
     .session-tip button{ border:none; background:transparent; color:var(--muted); cursor:pointer; border-radius:10px; padding:6px; }
     .session-tip::after{ content:""; position:absolute; left:var(--tail-x, 32px); bottom:-7px; width:14px; height:14px; transform:rotate(45deg); background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 92%, transparent)); border-right:1px solid var(--line); border-bottom:1px solid var(--line); border-radius:2px; filter:drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
-    @keyframes tipIn{0%{opacity:0; transform:translateY(10px) scale(.98)}60%{opacity:1; transform:translateY(0) scale(1)}100%{opacity:1; transform:translateY(0) scale(1)}}
     @media (max-width:640px){ .session-tip{ right:calc(max(10px, env(safe-area-inset-right, 0px)) + 6px); width:clamp(240px,60vw,360px);} }
   </style>
 </head>
@@ -440,19 +443,16 @@
     paletteSelect.addEventListener('change', e=> setPalette(e.target.value));
     patternSelect.addEventListener('change', e=> setPattern(e.target.value));
 
-    function reserveSpaceForSwitcher(){ const sw=document.querySelector('.switcher'); if(!sw) return; const h=sw.offsetHeight+24; document.body.style.paddingBottom=(innerWidth<=640? h+'px' : ''); }
+    function reserveSpaceForSwitcher(){ const sw=document.querySelector('.switcher'); if(!sw) return; const h=sw.offsetHeight+24; document.body.style.paddingBottom=(innerWidth<=640? h+'px' : ''); document.documentElement.style.setProperty('--switcher-h', (sw.offsetHeight||76)+'px'); }
     reserveSpaceForSwitcher(); addEventListener('resize', reserveSpaceForSwitcher);
 
-    // ==== Stars canvas (unified with RU) ====
+    // ==== Stars canvas (same sizes/count as RU) ====
     (function(){
       const c=document.getElementById('stars'); if(!c) return; const ctx=c.getContext('2d'); let dpr=Math.min(devicePixelRatio||1,2);
       function resize(){ const w=innerWidth, h=innerHeight; c.width=w*dpr; c.height=h*dpr; c.style.width=w+'px'; c.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
       resize(); addEventListener('resize', resize);
       let S=[];
-      function starParams(){
-        // same across all palettes (like RU): size and count
-        return {N:220, sizeMin:0.4, sizeMax:1.8, vel:.34, alphaMin:.35, alphaMax:.75};
-      }
+      function starParams(){ return {N:220, sizeMin:0.4, sizeMax:1.8, vel:.34, alphaMin:.35, alphaMax:.75}; }
       function rebuild(){ const p=starParams(); S=Array.from({length:p.N},()=>({ x:Math.random()*innerWidth, y:Math.random()*innerHeight, s:Math.random()*(p.sizeMax-p.sizeMin)+p.sizeMin, a:Math.random()*(p.alphaMax-p.alphaMin)+p.alphaMin, vx:(Math.random()-.5)*p.vel, vy:(Math.random()-.5)*p.vel })); }
       rebuild(); addEventListener('resize', rebuild);
       function tick(){ ctx.clearRect(0,0,innerWidth,innerHeight); ctx.fillStyle=STAR_COLOR; for(const p of S){ p.x+=p.vx; p.y+=p.vy; if(p.x<0)p.x+=innerWidth; if(p.x>innerWidth)p.x-=innerWidth; if(p.y<0)p.y+=innerHeight; if(p.y>innerHeight)p.y-=innerHeight; ctx.globalAlpha=p.a; ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,6.283); ctx.fill(); } ctx.globalAlpha=1; requestAnimationFrame(tick); }
@@ -502,44 +502,37 @@
     document.addEventListener('DOMContentLoaded', ()=>{ setNavHeightVar(); initAnchorSmoothScroll(); initScrollTop(); });
     addEventListener('resize', setNavHeightVar);
 
-    // ==== Session theme tip (per session) ====
+    // ==== Session theme tip — REBUILT (smooth hide/show + per-session dismiss) ====
     function initSessionTip(){
-      const key='themeTipDismissed'; const tip=document.getElementById('sessionTip'); if(!tip) return;
+      const key='themeTipDismissed';
+      const tip=document.getElementById('sessionTip'); if(!tip) return;
       const btn=document.getElementById('sessionTipClose');
       const sw=document.querySelector('.switcher');
       let dismissed = sessionStorage.getItem(key)==='1';
-      let showDebounce = null;
+      let visible = false; let animating = false; let showDebounce = null;
 
-      function place(){ if(!sw) return; const h=sw.offsetHeight||68; tip.style.bottom = (16 + h + 12) + 'px';
+      function place(){ if(!sw) return; const h=sw.offsetHeight||76; tip.style.bottom = (16 + h + 12) + 'px';
         const swRect = sw.getBoundingClientRect(); const tipRect = tip.getBoundingClientRect();
         if(tipRect.width){ const tail = Math.min(tipRect.width-24, Math.max(18, swRect.right - tipRect.left - swRect.width/2)); tip.style.setProperty('--tail-x', tail+'px'); }
       }
 
-      function show(){ if(dismissed) return; place(); tip.classList.remove('hiding'); tip.classList.add('show'); }
+      function onEndShow(){ animating=false; visible=true; }
+      function onEndHide(){ animating=false; visible=false; tip.classList.remove('is-exiting'); }
 
-      function hideAnimated(persist){
-        if(!tip.classList.contains('show')) return;
-        tip.classList.add('hiding');
-        const onEnd=(e)=>{ if(e.propertyName!=='opacity') return; tip.classList.remove('hiding'); tip.classList.remove('show'); if(persist){ dismissed=true; sessionStorage.setItem(key,'1'); } tip.removeEventListener('transitionend', onEnd); };
-        tip.addEventListener('transitionend', onEnd);
-        requestAnimationFrame(()=> tip.classList.remove('show'));
-      }
+      function show(immediate){ if(dismissed || animating || visible) return; place(); tip.classList.remove('is-exiting'); if(immediate){ tip.classList.add('is-visible'); visible=true; return; } animating=true; tip.classList.add('is-visible'); tip.addEventListener('transitionend', onEndShow, {once:true}); }
+      function hide(persist){ if(!visible || animating) { if(persist){ dismissed=true; try{ sessionStorage.setItem(key,'1'); }catch(e){} } return; } animating=true; tip.classList.add('is-exiting'); tip.addEventListener('transitionend', onEndHide, {once:true}); requestAnimationFrame(()=> tip.classList.remove('is-visible')); if(persist){ dismissed=true; try{ sessionStorage.setItem(key,'1'); }catch(e){} } }
 
-      if(!dismissed) setTimeout(show, 700);
-      if(btn) btn.addEventListener('click', (e)=>{ e.stopPropagation(); hideAnimated(true); });
-      tip.addEventListener('click', (e)=>{ if(e.target===btn) return; if(sw){ sw.animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}], {duration:420, easing:'ease-out'}); } hideAnimated(true); });
+      if(!dismissed) setTimeout(()=> show(true), 650);
+      if(btn) btn.addEventListener('click', (e)=>{ e.stopPropagation(); hide(true); });
+      tip.addEventListener('click', (e)=>{ if(e.target===btn) return; if(sw){ sw.animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}], {duration:420, easing:'ease-out'}); } hide(true); });
       addEventListener('resize', place);
 
-      // Hide on downward scroll, re-show on upward scroll (RU behavior)
       let lastY = window.pageYOffset || document.documentElement.scrollTop || 0;
       addEventListener('scroll', ()=>{
         const y = window.pageYOffset || document.documentElement.scrollTop || 0;
-        const dirDown = y > lastY + 10; const dirUp = y < lastY - 14;
-        if(dirDown && y > 80 && tip.classList.contains('show')){ hideAnimated(false); }
-        if(dirUp && !dismissed && !tip.classList.contains('show')){
-          if(showDebounce) clearTimeout(showDebounce);
-          showDebounce = setTimeout(()=>{ if(!dismissed && !tip.classList.contains('show')) show(); }, 160);
-        }
+        const down = y > lastY + 12; const up = y < lastY - 14;
+        if(down && y > 80){ hide(false); }
+        if(up && !dismissed && !visible){ if(showDebounce) clearTimeout(showDebounce); showDebounce = setTimeout(()=> show(false), 160); }
         lastY = y;
       }, {passive:true});
     }
