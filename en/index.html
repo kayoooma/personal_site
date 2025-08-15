@@ -223,43 +223,6 @@
     .session-tip button{ border:none; background:transparent; color:var(--muted); cursor:pointer; border-radius:10px; padding:6px; }
     .session-tip::after{ content:""; position:absolute; left:var(--tail-x, 32px); bottom:-7px; width:14px; height:14px; transform:rotate(45deg); background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 92%, transparent)); border-right:1px solid var(--line); border-bottom:1px solid var(--line); border-radius:2px; filter:drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
     @media (max-width:640px){ .session-tip{ right:calc(max(10px, env(safe-area-inset-right, 0px)) + 6px); width:clamp(240px,60vw,360px);} }
-  /* === Motion system — “cinema” level === */
-    [data-anim]{opacity:0;transform:translateY(var(--y,0)) translateX(var(--x,0)) scale(var(--s,1)) rotate(var(--r,0deg));filter:blur(var(--blur,0));transform-origin:var(--o,50% 50%);transition:transform var(--t,600ms) cubic-bezier(.2,.8,.2,1),opacity var(--t,600ms) cubic-bezier(.2,.8,.2,1),filter var(--t,600ms) cubic-bezier(.2,.8,.2,1),clip-path var(--t,700ms) cubic-bezier(.2,.8,.2,1);will-change:transform,opacity,filter,clip-path}
-    [data-anim].in{opacity:1;transform:none;filter:none;clip-path:inset(0 0 0 0 round 12px)}
-    [data-anim="fade-up"]{--y:18px}
-    [data-anim="fade-right"]{--x:-26px}
-    [data-anim="fade-left"]{--x:26px}
-    [data-anim="slide-left"]{--x:28px}
-    [data-anim="slide-right"]{--x:-28px}
-    [data-anim="slide-right-big"]{--x:-44px;--blur:2px;--t:720ms}
-    [data-anim="pop"]{--s:.96;--blur:3px}
-    [data-anim="scale-in"]{--s:.92;--blur:2px}
-    [data-anim="tilt-in"]{--y:14px;--r:-2deg;--o:50% 80%}
-    [data-anim="blur-rise"]{--y:14px;--blur:6px}
-    [data-anim="clip-left"]{clip-path:inset(0 100% 0 0 round 12px)}
-    [data-anim="clip-right"]{clip-path:inset(0 0 0 100% round 12px)}
-    [data-anim="clip-down"]{clip-path:inset(0 0 100% 0 round 12px)}
-    [data-anim][style*="--delay"]{transition-delay:var(--delay)}
-    [data-stagger] > [data-anim]{transition-delay:calc((var(--st,80ms))*var(--i,0) + var(--base,0ms))}
-  /* === WOW mode additions (cinema++) === */
-    #progressbar{position:fixed; top:0; left:0; height:3px; width:var(--w,0%); z-index:100; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:0 0 14px color-mix(in oklab, var(--accent) 55%, transparent)}
-    @media (max-width:640px){#progressbar{height:2px}}
-
-    .section[data-chapter]{position:relative; overflow:clip}
-    .section[data-chapter]::before{content:""; position:absolute; inset:0; background:linear-gradient(120deg, color-mix(in oklab, var(--accent) 60%, transparent), transparent 60%); transform:scaleX(0); transform-origin:0 50%; pointer-events:none; transition:transform 800ms cubic-bezier(.2,.8,.2,1), opacity 800ms; opacity:.65; mix-blend-mode:screen}
-    .section[data-chapter].enter::before{transform:scaleX(1); opacity:0}
-    .section[data-chapter][data-chapter="wipe-left"]::before{transform-origin:0 50%}
-    .section[data-chapter][data-chapter="wipe-right"]::before{transform-origin:100% 50%}
-
-    .h2[data-split="chars"]{display:inline-block; position:relative}
-    .h2[data-split="chars"] .char{display:inline-block; opacity:0; transform:translateY(14px) scale(.98); filter:blur(2px); transition:transform 700ms cubic-bezier(.2,.8,.2,1), opacity 700ms cubic-bezier(.2,.8,.2,1), filter 700ms cubic-bezier(.2,.8,.2,1); transition-delay:calc(var(--i)*12ms)}
-    .h2[data-split="chars"].in .char{opacity:1; transform:none; filter:none}
-
-    [data-parallax]{will-change:transform}
-
-    [data-tilt]{position:relative; will-change:transform; transform-style:preserve-3d; transition:transform .3s cubic-bezier(.2,.8,.2,1)}
-    [data-tilt] .glare{ position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; mix-blend-mode:screen; opacity:0; transition:opacity .25s ease; background: radial-gradient(240px 160px at var(--gx,50%) var(--gy,50%), color-mix(in oklab, var(--accent) 28%, transparent), transparent 60%) }
-    [data-tilt].tilt-on .glare{ opacity:.65 }
   </style>
 </head>
 <body>
@@ -299,30 +262,29 @@
           <span>•</span>
           <a href="./" hreflang="en" lang="en" class="active">EN</a>
         </div>
-        <a data-anim="pop" class="cta magnet" href="#contacts" onclick="closeMenu()" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Contact</span></a>
+        <a class="cta magnet" href="#contacts" onclick="closeMenu()" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Contact</span></a>
       </div>
     </div>
   </nav>
-  <div id="progressbar" aria-hidden="true"></div>
 
-  <header id="top" class="hero" data-parallax="0.16">
+  <header id="top" class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="lead" data-anim="fade-right">Tashkent, Uzbekistan • Open to relocation and occasional travel</span>
-        <h1 class="title" data-anim="clip-down">Growth Marketer / MarTech Specialist</h1>
-        <p class="subtitle" data-anim="blur-rise">I grow key metrics through <strong>analytics</strong>, <strong>structured hypothesis testing</strong>, and <strong>automation with AI and code</strong>. I connect marketing, production, and development (Python, Telegram bots, integrations) — from idea to a stable product.</p>
-        <div class="hero-cta" data-stagger="90">
-          <a data-anim="pop" class="cta magnet" href="https://t.me/+F8VMvrm4QmYzOWNi" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Portfolio on Telegram</span></a>
-          <a data-anim="pop" class="ghost" href="#cv">Download résumé (PDF)</a>
+        <span class="lead">Tashkent, Uzbekistan • Open to relocation and occasional travel</span>
+        <h1 class="title">Growth Marketer / MarTech Specialist</h1>
+        <p class="subtitle">I grow key metrics through <strong>analytics</strong>, <strong>structured hypothesis testing</strong>, and <strong>automation with AI and code</strong>. I connect marketing, production, and development (Python, Telegram bots, integrations) — from idea to a stable product.</p>
+        <div class="hero-cta">
+          <a class="cta magnet" href="https://t.me/+F8VMvrm4QmYzOWNi" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Portfolio on Telegram</span></a>
+          <a class="ghost" href="#cv">Download résumé (PDF)</a>
         </div>
         <div class="trust">
-          <div class="kpi" data-anim="slide-left"><div class="num">5+ yrs</div><div class="cap">Marketing & production experience</div></div>
-          <div class="kpi" data-anim="fade-up" data-delay="60"><div class="num">+30%</div><div class="cap">Engagement in 3 months</div></div>
-          <div class="kpi" data-anim="pop" data-delay="120"><div class="num">−15%</div><div class="cap">CPL reduction</div></div>
-          <div class="kpi" data-anim="slide-right" data-delay="180"><div class="num">+18%</div><div class="cap">Conversion uplift</div></div>
+          <div class="kpi reveal"><div class="num">5+ yrs</div><div class="cap">Marketing & production experience</div></div>
+          <div class="kpi reveal"><div class="num">+30%</div><div class="cap">Engagement in 3 months</div></div>
+          <div class="kpi reveal"><div class="num">−15%</div><div class="cap">CPL reduction</div></div>
+          <div class="kpi reveal"><div class="num">+18%</div><div class="cap">Conversion uplift</div></div>
         </div>
       </div>
-      <aside class="portrait-card" data-anim="tilt-in" data-tilt data-tilt-max="10" aria-label="Portrait">
+      <aside class="portrait-card reveal" aria-label="Portrait">
         <div class="portrait-wrap">
           <img class="portrait" src="../assets/portrait.jpg" alt="Komil Sultonov" loading="lazy" onerror="this.closest('.portrait-card').style.display='none'">
           <div class="portrait-badge"><span class="txt">Komil Sultonov</span><span class="txt">Open to projects</span></div>
@@ -331,86 +293,86 @@
     </div>
   </header>
 
-  <section id="services" class="section" data-chapter="wipe-right">
+  <section id="services" class="section">
     <div class="container">
-      <h2 class="h2" data-split="chars">How I help businesses</h2>
+      <h2 class="h2">How I help businesses</h2>
       <p class="p">Outcome‑focused: growth models, funnel automation, and content that moves the needle. I’m most effective in three areas:</p>
       <div class="grid cols-3" style="margin-top:18px">
-        <article class="card" data-tilt data-tilt-max="6" data-anim="clip-right"><div class="card-title">Growth Marketing</div><ul class="muted"><li>Analytics & hypothesis prioritization</li><li>Media plans & campaign launch</li><li>CPL/CPA/ROAS optimization</li></ul></article>
-        <article class="card" data-tilt data-tilt-max="6" data-anim="scale-in" data-delay="80"><div class="card-title">MarTech & Automation</div><ul class="muted"><li>Telegram bots, payments, CRM</li><li>Python scripts, integrations</li><li>AI in production & sales</li></ul></article>
-        <article class="card" data-tilt data-tilt-max="6" data-anim="tilt-in" data-delay="160"><div class="card-title">Content & Production</div><ul class="muted"><li>3D/Motion (Blender, AE)</li><li>Stories/reels, post‑production</li><li>Creatives for performance</li></ul></article>
+        <article class="card reveal"><div class="card-title">Growth Marketing</div><ul class="muted"><li>Analytics & hypothesis prioritization</li><li>Media plans & campaign launch</li><li>CPL/CPA/ROAS optimization</li></ul></article>
+        <article class="card reveal"><div class="card-title">MarTech & Automation</div><ul class="muted"><li>Telegram bots, payments, CRM</li><li>Python scripts, integrations</li><li>AI in production & sales</li></ul></article>
+        <article class="card reveal"><div class="card-title">Content & Production</div><ul class="muted"><li>3D/Motion (Blender, AE)</li><li>Stories/reels, post‑production</li><li>Creatives for performance</li></ul></article>
       </div>
     </div>
   </section>
 
-  <section id="cases" class="section" data-chapter="wipe-left">
+  <section id="cases" class="section">
     <div class="container">
-      <h2 class="h2" data-split="chars">My product: WatchWithNoHands</h2>
+      <h2 class="h2">My product: WatchWithNoHands</h2>
       <p class="p">An IT startup with a subscription system, referral program, and a Telegram bot as the main UI. From idea to implementation: database architecture, code optimization, marketing, testing. The product is ~80% ready and evolving.</p>
       <div class="grid cols-2" style="margin-top:18px">
-        <div class="card" data-anim="clip-left"><div class="card-title">What I built</div><ul class="muted"><li>Two‑bot architecture (main + support)</li><li>Subscriptions, device management, referrals</li><li>Automated back‑office (APScheduler, exchangers, DBs)</li></ul></div>
-        <div class="card" data-anim="tilt-in" data-delay="120"><div class="card-title">Tech</div><div class="mono small">Python (aiogram 3.x, aiosqlite), APScheduler, YooKassa/Payme integrations, JSON, MarkdownV2</div></div>
+        <div class="card reveal"><div class="card-title">What I built</div><ul class="muted"><li>Two‑bot architecture (main + support)</li><li>Subscriptions, device management, referrals</li><li>Automated back‑office (APScheduler, exchangers, DBs)</li></ul></div>
+        <div class="card reveal"><div class="card-title">Tech</div><div class="mono small">Python (aiogram 3.x, aiosqlite), APScheduler, YooKassa/Payme integrations, JSON, MarkdownV2</div></div>
       </div>
     </div>
   </section>
 
-  <section id="skills" class="section" data-chapter="wipe-right">
+  <section id="skills" class="section">
     <div class="container">
-      <h2 class="h2" data-split="chars">Skills & tools</h2>
+      <h2 class="h2">Skills & tools</h2>
       <div class="grid cols-3" style="margin-top:8px">
-        <div class="card" data-anim="pop"><div class="card-title">Marketing</div><p class="muted">Social, paid ads, search, copywriting, affiliate, viral, analytics.</p></div>
-        <div class="card" data-anim="fade-up" data-delay="80"><div class="card-title">MarTech / Code</div><p class="muted">Python, Telegram, automation, code optimization, ChatGPT, Stable Diffusion.</p></div>
-        <div class="card" data-anim="slide-right" data-delay="160"><div class="card-title">Production</div><p class="muted">Blender (3D), After Effects, Premiere Pro, Photoshop, branding, identity.</p></div>
+        <div class="card reveal"><div class="card-title">Marketing</div><p class="muted">Social, paid ads, search, copywriting, affiliate, viral, analytics.</p></div>
+        <div class="card reveal"><div class="card-title">MarTech / Code</div><p class="muted">Python, Telegram, automation, code optimization, ChatGPT, Stable Diffusion.</p></div>
+        <div class="card reveal"><div class="card-title">Production</div><p class="muted">Blender (3D), After Effects, Premiere Pro, Photoshop, branding, identity.</p></div>
       </div>
-      <div class="card" data-anim="clip-right" data-delay="220" style="margin-top:18px"><div class="card-title">Languages</div><p class="muted">Russian — native · Uzbek — C1 · English — B2 (IELTS 6.5)</p></div>
+      <div class="card reveal" style="margin-top:18px"><div class="card-title">Languages</div><p class="muted">Russian — native · Uzbek — C1 · English — B2 (IELTS 6.5)</p></div>
     </div>
   </section>
 
-  <section id="experience" class="section" data-chapter="wipe-left">
+  <section id="experience" class="section">
     <div class="container">
-      <h2 class="h2" data-split="chars">Experience</h2>
+      <h2 class="h2">Experience</h2>
     <div class="grid cols-2" style="margin-top:6px">
-      <div class="card" data-anim="fade-right"><div class="card-title">WatchWithNoHands — Founder</div><p class="small muted">Jun 2024 — present · Tashkent</p><ul class="muted"><li>Product from idea to release</li><li>Subscriptions, referrals, Telegram bot, DB, marketing</li></ul></div>
-      <div class="card" data-anim="fade-left" data-delay="80"><div class="card-title">AGAT Credit — Lead SMM/Marketer</div><p class="small muted">Sep 2023 — Jun 2024 · Tashkent</p><ul class="muted"><li>+30% engagement in 3 months</li><li>−15% CPL via media plans & optimizations</li><li>+18% conversion, −12% CPC</li></ul></div>
-      <div class="card" data-anim="scale-in" data-delay="160"><div class="card-title">Fiverr — 3D Motion Designer</div><p class="small muted">Jun 2020 — Aug 2023</p><p class="muted">Commercial 3D animations (Romania, India, Nigeria, USA). Blender, characters, product shots, logos.</p></div>
-      <div class="card" data-anim="tilt-in" data-delay="240"><div class="card-title">Mirvalino Industries — SMM Manager</div><p class="small muted">Oct 2021 — May 2023</p><p class="muted">Content plan, creatives, targeting, market, bookkeeping.</p></div>
+      <div class="card reveal"><div class="card-title">WatchWithNoHands — Founder</div><p class="small muted">Jun 2024 — present · Tashkent</p><ul class="muted"><li>Product from idea to release</li><li>Subscriptions, referrals, Telegram bot, DB, marketing</li></ul></div>
+      <div class="card reveal"><div class="card-title">AGAT Credit — Lead SMM/Marketer</div><p class="small muted">Sep 2023 — Jun 2024 · Tashkent</p><ul class="muted"><li>+30% engagement in 3 months</li><li>−15% CPL via media plans & optimizations</li><li>+18% conversion, −12% CPC</li></ul></div>
+      <div class="card reveal"><div class="card-title">Fiverr — 3D Motion Designer</div><p class="small muted">Jun 2020 — Aug 2023</p><p class="muted">Commercial 3D animations (Romania, India, Nigeria, USA). Blender, characters, product shots, logos.</p></div>
+      <div class="card reveal"><div class="card-title">Mirvalino Industries — SMM Manager</div><p class="small muted">Oct 2021 — May 2023</p><p class="muted">Content plan, creatives, targeting, market, bookkeeping.</p></div>
     </div>
     </div>
   </section>
 
-  <section id="story" class="section story" data-chapter="wipe-right">
+  <section id="story" class="section story">
     <div class="container">
-      <h2 class="h2" data-split="chars">My story: from inner discipline to products</h2>
+      <h2 class="h2">My story: from inner discipline to products</h2>
       <p class="p">Ten years in two chapters. First — the foundation: mindset work, principles and an entrepreneurial lens. Then — practice: marketing, automation, production and my own products.</p>
       <div class="wrap">
-        <div class="card timeline" data-anim="slide-right-big">
+        <div class="card reveal timeline">
           <div id="storyProgress" aria-hidden="true"></div>
           <div class="milestone"><div class="when">Chapter 1 · First 5 years — Foundation</div><div class="what">From chaos to system</div><div class="desc">Overcoming the past, building discipline and attention. Forming a personal philosophy and stress‑testing it. Studying the world and business models to understand <em>how growth mechanics work</em>.</div><div class="chips"><span class="chip">daily practice</span><span class="chip">principles/frameworks</span><span class="chip">book notes</span></div></div>
           <div class="milestone"><div class="when">Crossroads</div><div class="what">Losing track — coming back stronger</div><div class="desc">Several times I had to pause and rethink the route. Each time — back to core values and an updated action plan.</div><div class="chips"><span class="chip">reframing</span><span class="chip">antifragility</span><span class="chip">focus</span></div></div>
           <div class="milestone"><div class="when">Chapter 2 · Next 5 years — Practice</div><div class="what">Applying knowledge in the real world</div><div class="desc">Marketing, MarTech and Python automation. Product experiments, Telegram bots, production. Metric growth for clients and my own IT product.</div><div class="chips"><span class="chip">+30% engagement</span><span class="chip">−15% CPL</span><span class="chip">+18% conversion</span></div></div>
           <div class="milestone"><div class="when">Today</div><div class="what">Clear vision, calm speed</div><div class="desc">I connect strategy, creativity and code — from idea to a resilient growth system.</div></div>
         </div>
-        <div class="card" data-anim="scale-in"><div class="card-title">What I strengthened (visual)</div><div class="small muted" style="margin-bottom:8px">Bars fill on scroll</div><div class="bars"><div class="label">Mindset & discipline</div><div class="bar"><i data-w="92"></i></div><div class="label" style="margin-top:8px">Business models & strategy</div><div class="bar"><i data-w="86"></i></div><div class="label" style="margin-top:8px">Practice (MarTech, production)</div><div class="bar"><i data-w="94"></i></div></div><div class="story-cta"><span class="muted">Ready to apply this to your metrics.</span><a data-anim="pop" class="cta magnet" href="https://t.me/Ka_yooo_ma" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Discuss on Telegram</span></a></div></div>
+        <div class="card reveal"><div class="card-title">What I strengthened (visual)</div><div class="small muted" style="margin-bottom:8px">Bars fill on scroll</div><div class="bars"><div class="label">Mindset & discipline</div><div class="bar"><i data-w="92"></i></div><div class="label" style="margin-top:8px">Business models & strategy</div><div class="bar"><i data-w="86"></i></div><div class="label" style="margin-top:8px">Practice (MarTech, production)</div><div class="bar"><i data-w="94"></i></div></div><div class="story-cta"><span class="muted">Ready to apply this to your metrics.</span><a class="cta magnet" href="https://t.me/Ka_yooo_ma" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Discuss on Telegram</span></a></div></div>
       </div>
     </div>
   </section>
 
-  <section id="lab" class="section" data-chapter="wipe-left">
+  <section id="lab" class="section">
     <div class="container">
-      <h2 class="h2" data-split="chars">Lab: growth tools</h2>
+      <h2 class="h2">Lab: growth tools</h2>
       <p class="p">Three mini‑tools I actually use. They reflect my thinking, prioritization, and the ability to build useful tools in plain JS.</p>
-      <div class="card" data-anim="pop" style="margin-top:18px"><div class="card-title">1) Quick ROI calculator</div><div class="row"><label class="field"><span class="label">Budget</span><input id="roiBudget" class="number" type="number" min="0" step="1000" value="10000000"></label><label class="field"><span class="label">CPL (cost per lead)</span><input id="roiCpl" class="number" type="number" min="1" step="1000" value="50000"></label><label class="field"><span class="label">CR: Lead → Sale, %</span><input id="roiCr" class="number" type="number" min="0" max="100" step="0.5" value="12"></label><label class="field"><span class="label">Average order value</span><input id="roiAov" class="number" type="number" min="0" step="1000" value="350000"></label><label class="field"><span class="label">Margin, %</span><input id="roiMargin" class="number" type="number" min="0" max="100" step="1" value="40"></label></div><div class="row"><div class="stat"><span class="label">Leads</span><span id="roiLeads" class="v">—</span></div><div class="stat"><span class="label">Sales</span><span id="roiSales" class="v">—</span></div><div class="stat"><span class="label">Revenue</span><span id="roiRev" class="v">—</span></div><div class="stat"><span class="label">Profit</span><span id="roiProfit" class="v">—</span></div><div class="stat"><span class="label">ROI</span><span id="roiRoi" class="v">—</span></div></div></div>
-      <div class="card" data-anim="clip-left" style="margin-top:18px"><div class="card-title">2) ICE prioritization</div><form id="iceForm" class="row" style="align-items:end"><label class="field" style="grid-column:1/-1"><span class="label">Hypothesis</span><input id="iceName" class="input" placeholder="E.g., Add quizzes to the landing page"/></label><label class="field"><span class="label">Impact (1–5)</span><input id="iceI" class="number" type="number" min="1" max="5" value="4"></label><label class="field"><span class="label">Confidence (1–5)</span><input id="iceC" class="number" type="number" min="1" max="5" value="3"></label><label class="field"><span class="label">Ease (1–5)</span><input id="iceE" class="number" type="number" min="1" max="5" value="4"></label><button class="btn" type="submit">Add</button><button class="btn" type="button" id="iceReset">Reset</button></form><div id="iceList" class="mono small" style="margin-top:12px"></div></div>
-      <div class="card" data-anim="fade-up" style="margin-top:18px"><div class="card-title">3) A/B playground: lead uplift</div><div class="row"><label class="field"><span class="label">Visitors</span><input id="abVisitors" class="number" type="number" min="0" step="100" value="20000"></label><label class="field"><span class="label">Conversion A, %</span><input id="abConvA" class="number" type="number" min="0" max="100" step="0.1" value="3.2"></label><label class="field"><span class="label">B vs A uplift, %</span><input id="abUplift" class="number" type="number" min="0" step="0.5" value="12"></label></div><div class="row"><div class="stat"><span class="label">Leads A</span><span id="abLeadsA" class="v">—</span></div><div class="stat"><span class="label">Leads B</span><span id="abLeadsB" class="v">—</span></div><div class="stat"><span class="label">Δ B vs A</span><span id="abDiff" class="v">—</span></div></div></div>
+      <div class="card reveal" style="margin-top:18px"><div class="card-title">1) Quick ROI calculator</div><div class="row"><label class="field"><span class="label">Budget</span><input id="roiBudget" class="number" type="number" min="0" step="1000" value="10000000"></label><label class="field"><span class="label">CPL (cost per lead)</span><input id="roiCpl" class="number" type="number" min="1" step="1000" value="50000"></label><label class="field"><span class="label">CR: Lead → Sale, %</span><input id="roiCr" class="number" type="number" min="0" max="100" step="0.5" value="12"></label><label class="field"><span class="label">Average order value</span><input id="roiAov" class="number" type="number" min="0" step="1000" value="350000"></label><label class="field"><span class="label">Margin, %</span><input id="roiMargin" class="number" type="number" min="0" max="100" step="1" value="40"></label></div><div class="row"><div class="stat"><span class="label">Leads</span><span id="roiLeads" class="v">—</span></div><div class="stat"><span class="label">Sales</span><span id="roiSales" class="v">—</span></div><div class="stat"><span class="label">Revenue</span><span id="roiRev" class="v">—</span></div><div class="stat"><span class="label">Profit</span><span id="roiProfit" class="v">—</span></div><div class="stat"><span class="label">ROI</span><span id="roiRoi" class="v">—</span></div></div></div>
+      <div class="card reveal" style="margin-top:18px"><div class="card-title">2) ICE prioritization</div><form id="iceForm" class="row" style="align-items:end"><label class="field" style="grid-column:1/-1"><span class="label">Hypothesis</span><input id="iceName" class="input" placeholder="E.g., Add quizzes to the landing page"/></label><label class="field"><span class="label">Impact (1–5)</span><input id="iceI" class="number" type="number" min="1" max="5" value="4"></label><label class="field"><span class="label">Confidence (1–5)</span><input id="iceC" class="number" type="number" min="1" max="5" value="3"></label><label class="field"><span class="label">Ease (1–5)</span><input id="iceE" class="number" type="number" min="1" max="5" value="4"></label><button class="btn" type="submit">Add</button><button class="btn" type="button" id="iceReset">Reset</button></form><div id="iceList" class="mono small" style="margin-top:12px"></div></div>
+      <div class="card reveal" style="margin-top:18px"><div class="card-title">3) A/B playground: lead uplift</div><div class="row"><label class="field"><span class="label">Visitors</span><input id="abVisitors" class="number" type="number" min="0" step="100" value="20000"></label><label class="field"><span class="label">Conversion A, %</span><input id="abConvA" class="number" type="number" min="0" max="100" step="0.1" value="3.2"></label><label class="field"><span class="label">B vs A uplift, %</span><input id="abUplift" class="number" type="number" min="0" step="0.5" value="12"></label></div><div class="row"><div class="stat"><span class="label">Leads A</span><span id="abLeadsA" class="v">—</span></div><div class="stat"><span class="label">Leads B</span><span id="abLeadsB" class="v">—</span></div><div class="stat"><span class="label">Δ B vs A</span><span id="abDiff" class="v">—</span></div></div></div>
     </div>
   </section>
 
-  <section id="contacts" class="section" data-chapter="wipe-right">
+  <section id="contacts" class="section">
     <div class="container">
-      <h2 class="h2" data-split="chars">Contacts</h2>
+      <h2 class="h2">Contacts</h2>
       <div class="grid cols-2" style="margin-top:12px">
-        <div class="card" data-anim="fade-right"><div class="card-title">Get in touch</div><p class="p">Happy to discuss your goals and draft quick growth hypotheses.</p><div style="display:flex; gap:12px; flex-wrap:wrap; margin:10px 0 14px"><a data-anim="pop" class="cta magnet" href="https://t.me/Ka_yooo_ma" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Message on Telegram</span></a></div><div class="input" style="margin:8px 0">kamasultanov8@gmail.com</div><div class="input" style="margin:8px 0">+998 (88) 111‑66‑12</div><div class="small muted" style="margin-top:6px">Tashkent, Uzbekistan</div></div>
-        <div id="cv" class="card" data-anim="fade-left" data-delay="120"><div class="card-title">Résumé (PDF)</div><p class="p">Download the full résumé.</p><a data-anim="pop" class="cta magnet" id="resumeLink" href="../assets/Султонов К. Г. (Growth Hacker_MarTech-специалист).pdf" type="application/pdf" download onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Download PDF</span></a></div>
+        <div class="card reveal"><div class="card-title">Get in touch</div><p class="p">Happy to discuss your goals and draft quick growth hypotheses.</p><div style="display:flex; gap:12px; flex-wrap:wrap; margin:10px 0 14px"><a class="cta magnet" href="https://t.me/Ka_yooo_ma" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Message on Telegram</span></a></div><div class="input" style="margin:8px 0">kamasultanov8@gmail.com</div><div class="input" style="margin:8px 0">+998 (88) 111‑66‑12</div><div class="small muted" style="margin-top:6px">Tashkent, Uzbekistan</div></div>
+        <div id="cv" class="card reveal"><div class="card-title">Résumé (PDF)</div><p class="p">Download the full résumé.</p><a class="cta magnet" id="resumeLink" href="../assets/Султонов К. Г. (Growth Hacker_MarTech-специалист).pdf" type="application/pdf" download onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Download PDF</span></a></div>
       </div>
     </div>
   </section>
@@ -467,34 +429,6 @@
 
     const revObs=new IntersectionObserver((ents)=>{ ents.forEach(ent=>{ if(ent.isIntersecting){ ent.target.classList.add('reveal-visible'); revObs.unobserve(ent.target);} }); }, {threshold:.18});
     document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
-
-    // === Motion system init (cinema) ===
-    function initCinema(){
-      const els=document.querySelectorAll('[data-anim]');
-      const obs=new IntersectionObserver((ents)=>{
-        ents.forEach(ent=>{
-          if(ent.isIntersecting){
-            const el=ent.target; const d=parseInt(el.dataset.delay||'0',10)||0; if(d) el.style.setProperty('--delay', d+'ms');
-            el.classList.add('in'); obs.unobserve(el);
-          }
-        });
-      }, {threshold:.18, rootMargin:'0px 0px -10% 0px'});
-      els.forEach(el=>obs.observe(el));
-      document.querySelectorAll('[data-stagger]').forEach(cont=>{
-        const step=parseInt(cont.dataset.stagger||'80',10); const base=parseInt(cont.dataset.base||'0',10);
-        cont.style.setProperty('--st', step+'ms'); cont.style.setProperty('--base', base+'ms');
-        let i=0; cont.querySelectorAll(':scope > [data-anim]').forEach(ch=>{ ch.style.setProperty('--i', i++); });
-      });
-    }
-    document.addEventListener('DOMContentLoaded', ()=>{ initCinema(); initSplitHeadings(); initParallax(); initBackgroundParallax(); initTilt(); initChapterWipe(); initProgressbar(); });
-
-    /* === WOW functions (JS) === */
-    function initProgressbar(){ const bar=document.getElementById('progressbar'); if(!bar) return; const update=()=>{ const h=document.documentElement; const max=h.scrollHeight - innerHeight; const y=(h.scrollTop||document.body.scrollTop||0); const p=max>0? (y/max)*100 : 0; bar.style.setProperty('--w', p+'%'); }; addEventListener('scroll', update, {passive:true}); addEventListener('resize', update); update(); }
-    function initParallax(){ const els=[...document.querySelectorAll('[data-parallax]')]; const onScroll=()=>{ const y=window.pageYOffset||document.documentElement.scrollTop||0; els.forEach(el=>{ const sp=parseFloat(el.dataset.parallax||'0.1'); el.style.transform=`translate3d(0, ${Math.round(-y*sp)}px, 0)`; }); }; addEventListener('scroll', onScroll, {passive:true}); addEventListener('resize', onScroll); onScroll(); }
-    function initBackgroundParallax(){ const conf=[{sel:'.mesh',k:.02},{sel:'.neon-grid',k:.03},{sel:'.neon-laser',k:.06},{sel:'.glass-orbs',k:.04}]; const layers=conf.map(o=>({el:document.querySelector(o.sel),k:o.k})).filter(o=>o.el); const onScroll=()=>{ const y=window.pageYOffset||document.documentElement.scrollTop||0; layers.forEach(o=>{ o.el.style.transform=`translate3d(0, ${Math.round(y*o.k)}px, 0)`; }); }; addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
-    function initTilt(){ if(!matchMedia('(hover: hover)').matches) return; const els=[...document.querySelectorAll('[data-tilt]')]; els.forEach(el=>{ const max=parseFloat(el.dataset.tiltMax||'8'); const glare=document.createElement('i'); glare.className='glare'; el.appendChild(glare); let af=null; const rect=()=>el.getBoundingClientRect(); function move(e){ const r=rect(); const px=(e.clientX-r.left)/r.width; const py=(e.clientY-r.top)/r.height; const rx=(0.5-py)*max*2, ry=(px-0.5)*max*2; if(af) cancelAnimationFrame(af); af=requestAnimationFrame(()=>{ el.style.transform=`perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`; el.classList.add('tilt-on'); glare.style.setProperty('--gx', (px*100)+'%'); glare.style.setProperty('--gy', (py*100)+'%'); }); } function leave(){ if(af) cancelAnimationFrame(af); el.style.transform=''; el.classList.remove('tilt-on'); } el.addEventListener('mousemove', move); el.addEventListener('mouseleave', leave); }); }
-    function initChapterWipe(){ const secs=[...document.querySelectorAll('.section[data-chapter]')]; const obs=new IntersectionObserver((ents)=>{ ents.forEach(ent=>{ if(ent.isIntersecting){ ent.target.classList.add('enter'); obs.unobserve(ent.target); } }); }, {threshold:.2}); secs.forEach(s=>obs.observe(s)); }
-    function initSplitHeadings(){ document.querySelectorAll('h2[data-split="chars"]').forEach(h=>{ if(h.dataset.prepared) return; const txt=h.textContent.trim(); h.textContent=''; [...txt].forEach((ch,i)=>{ const sp=document.createElement('span'); sp.className='char'; sp.style.setProperty('--i', i); sp.textContent=ch; h.appendChild(sp); }); h.dataset.prepared='1'; const io=new IntersectionObserver((ents)=>{ ents.forEach(ent=>{ if(ent.isIntersecting){ h.classList.add('in'); io.unobserve(h);} }); }, {threshold:.5}); io.observe(h); }); }
 
     let STAR_COLOR = '#fff';
     function syncStarColor(){ STAR_COLOR = (document.documentElement.getAttribute('data-palette') === 'silver-light') ? '#0b1220' : '#fff'; }
