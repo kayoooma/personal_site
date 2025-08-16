@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://kayoooma.github.io/personal_site/assets/og-cover.jpg?v=1" />
   <!-- Favicon / tab icon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f8fafc'/%3E%3Cstop offset='0.5' stop-color='%23cbd5e1'/%3E%3Cstop offset='1' stop-color='%2394a3b8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='6' y='6' width='52' height='52' rx='14' fill='%230b0d12'/%3E%3Cpath d='M20 44 L44 20 M44 20 L44 34 M44 20 L30 20' stroke='url(%23g)' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f8fafc'/%3E%3Cstop offset='0.5' stop-color='%23cbd5e1'/%3E%3Cstop offset='1' stop-color='%2394a3b8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='6' y='6' width='52' height='52' rx='14' fill='%230b0d12'/%3E%3Cpath d='M20 44 L44 20 M44 20 L44 34 M44 20 L30 20' stroke='url(%23g)' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f8fafc'/%3E%3Cstop offset='0.5' stop-color='%23cbd5e1'/%3E%3Cstop offset='1' stop-color='%2394a3b8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='6' y='6' width='52' height='52' rx='14' fill='%230b0d12'/%3E%3Cpath d='M20 44 L44 20 M44 20 L44 34 M44 20 L30 20' stroke='url(%23g)' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -126,10 +126,24 @@
     .neon-laser{z-index:-4; background:linear-gradient(120deg, transparent 45%, color-mix(in oklab, var(--accent-2) 18%, transparent) 50%, transparent 55%), linear-gradient(-120deg, transparent 45%, color-mix(in oklab, var(--accent) 18%, transparent) 50%, transparent 55%); animation: laserSweep 9s linear infinite}
     @keyframes laserSweep{0%{background-position:-200% 0, 200% 0}100%{background-position:200% 0, -200% 0}}
 
-    .glass-orbs{z-index:-5; filter:blur(60px) saturate(120%); opacity:.42}
+    .glass-orbs{z-index:-5; filter:blur(60px) saturate(120%); opacity:.42; animation:orbMove 30s ease-in-out infinite alternate;}
     .glass-orbs::before, .glass-orbs::after{content:""; position:absolute; width:720px; height:720px; border-radius:50%; filter:blur(40px);} 
-    .glass-orbs::before{left:-120px; top:-160px; background:radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--accent) 90%, transparent), transparent 60%)}
-    .glass-orbs::after{right:-160px; bottom:-160px; background:radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--accent-2) 90%, transparent), transparent 60%)}
+    .glass-orbs::before{left:-120px; top:-160px; background:radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--accent) 90%, transparent), transparent 60%); animation:orb1Anim 28s ease-in-out infinite alternate;}
+    .glass-orbs::after{right:-160px; bottom:-160px; background:radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--accent-2) 90%, transparent), transparent 60%); animation:orb2Anim 24s ease-in-out infinite alternate;}
+
+    @keyframes orbMove {
+      0% { transform: scale(1) translateX(0) translateY(0); }
+      50% { transform: scale(1.05) translateX(10px) translateY(10px); }
+      100% { transform: scale(1) translateX(0) translateY(0); }
+    }
+    @keyframes orb1Anim {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(20px, 30px); }
+    }
+    @keyframes orb2Anim {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-30px, -20px); }
+    }
 
     .graphite-stripes{z-index:-5; opacity:.18; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 10px)}
 
@@ -187,6 +201,9 @@
     .milestone .when{font:600 12px/1.1 Inter; color:var(--muted); letter-spacing:.3px}
     .milestone .what{font-weight:650; margin:4px 0}
     .milestone .desc{color:#cbd1db}
+    /* Adjusted styles for milestone text in silver-light palette */
+    html[data-palette="silver-light"] .milestone .what { color: #1f2937; }
+    html[data-palette="silver-light"] .milestone .desc { color: #334155; }
     .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
     .chip{font:600 11px/1 Inter; letter-spacing:.3px; padding:6px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); background:color-mix(in oklab, var(--panel) 92%, transparent)}
     .bars{display:grid; gap:10px}
@@ -220,7 +237,7 @@
     .select{appearance:none; -webkit-appearance:none; padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:color-mix(in oklab, var(--panel) 96%, transparent); color:color-mix(in oklab, var(--text) 90%, transparent)}
     .switcher .row{display:flex; gap:8px; align-items:center}
     @media (max-width:540px){ .switcher{flex-direction:column; align-items:stretch} }
-    @media (max-width:640px){ .switcher{left:auto; right:calc(max(10px, env(safe-area-inset-right, 0px)) + 6px); bottom:calc(max(12px, env(safe-area-inset-bottom, 0px)) + 6px); width:clamp(200px, 45vw, 280px); padding:10px 12px; gap:10px;} .switcher .row{ display:grid; grid-template-columns:max-content 1fr; column-gap:10px; align-items:center } .switcher label{ margin:0 } .switcher .select{ width:100% } }
+    @media (max-width:640px){ .switcher{left:auto; right:calc(max(10px, env(safe-area-inset-right, 0px)) + 6px); bottom:calc(max(12px, env(safe-area-inset-bottom, 0px)) + 6px); width:clamp(200px, 45vw, 280px); padding:10px 12px; gap:10px;} .switcher .row{ display:grid; grid-template-columns:max-content 1fr; column-gap:10px; align-items:center } .switcher .select{ width:100% } }
 
     .theme-hint{position:fixed; z-index:85; max-width:min(92vw,560px); padding:12px 14px; border-radius:14px; border:1px solid var(--line); background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 92%, transparent)); box-shadow:var(--shadow); opacity:0; transform:translateY(8px) scale(.98); pointer-events:auto}
     .theme-hint.show{animation:psst-in .45s ease forwards, psst-breathe 3.2s ease-in-out 1.2s 2 alternate}
@@ -235,6 +252,40 @@
     .scroll-top{ position:fixed; right:16px; bottom:16px; border:none; border-radius:12px; padding:10px; background:var(--panel); border:1px solid var(--line); color:var(--text); box-shadow: var(--shadow); cursor:pointer; opacity:0; visibility:hidden; transform:translateY(8px); transition: opacity .18s ease, transform .18s ease, visibility .18s; z-index:95; }
     .scroll-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
     .scroll-top:hover{ filter:brightness(1.1) }
+
+    /* Стили для изображений сертификатов */
+    .certificate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Настройте minmax по необходимости */
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .certificate-card {
+      background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 100%, transparent));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px; /* Немного меньше отступа для изображений */
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .certificate-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px; /* Немного скруглённые углы для изображений */
+      margin-bottom: 10px;
+    }
+    .certificate-card a {
+      font-weight: 600;
+      color: var(--accent); /* Акцентный цвет для ссылок */
+      text-decoration: none;
+      margin-top: 5px;
+    }
+    .certificate-card a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -266,6 +317,7 @@
         <a href="#cases" onclick="closeMenu()">Кейсы</a>
         <a href="#skills" onclick="closeMenu()">Навыки</a>
         <a href="#experience" onclick="closeMenu()">Опыт</a>
+        <a href="#education" onclick="closeMenu()">Образование</a>
         <a href="#story" onclick="closeMenu()">История</a>
         <a href="#lab" onclick="closeMenu()">Лаб</a>
         <a href="#contacts" onclick="closeMenu()">Контакты</a>
@@ -352,6 +404,44 @@
     </div>
   </section>
 
+  <section id="education" class="section">
+    <div class="container">
+      <h2 class="h2">Образование и сертификаты</h2>
+      <div class="grid cols-2" style="margin-top:8px">
+        <div class="card reveal"><div class="card-title">Образование</div><ul class="muted"><li>Нац. университет им. Мирзо Улугбека — Экономика/HR (ожидается 2026)</li><li>Школа №178</li></ul></div>
+        <div class="card reveal"><div class="card-title">Курсы и сертификаты</div><ul class="muted"><li>PMI: Fundamentals of Predictive Project Management (2024)</li><li>ChatGPT для бизнеса и рекламы (2024)</li><li>Нейросети для маркетолога (2024)</li><li>Автоматизация 2.0 — AI‑сотрудники (2024)</li><li>Udemy: Google Ads (2024)</li><li>Skillshare: Advanced/Product 3D Animation (2023)</li><li>IELTS 6.5</li></ul></div>
+      </div>
+      <!-- Раздел сертификатов -->
+      <h3 class="h2" style="margin-top: 40px;">Сертификаты</h3>
+      <div class="certificate-grid">
+        <div class="certificate-card reveal">
+          <img src="./assets/photo_2025-08-12_03-31-45.jpg" alt="Сертификат Skillshare: Product Animation in Blender" loading="lazy">
+          <p class="small muted">Skillshare: Product Animation in Blender</p>
+        </div>
+        <div class="certificate-card reveal">
+          <img src="./assets/photo_2025-08-12_03-32-19.jpg" alt="Сертификат Skillshare: Advanced 3D Animation" loading="lazy">
+          <p class="small muted">Skillshare: Advanced 3D Animation</p>
+        </div>
+        <div class="certificate-card reveal">
+          <img src="./assets/sertificate Udemy Google Ads 78987096t7597ser.png" alt="Сертификат Udemy: Google Ads" loading="lazy">
+          <p class="small muted">Udemy: Google Ads</p>
+        </div>
+        <div class="certificate-card reveal">
+          <a href="./assets/FundamentalsofPredictiveProjectManagement_Badge20240512_8_ogbfc1.pdf" target="_blank" rel="noopener">
+            <img src="./assets/pmi badge.png" alt="Бейдж сертификата PMI" loading="lazy">
+            <p class="small muted">PMI: Fundamentals of Predictive Project Management (PDF)</p>
+          </a>
+        </div>
+        <div class="certificate-card reveal">
+          <a href="./assets/UZ00425501251-27-04-2025-ETRF.pdf" target="_blank" rel="noopener">
+            <img src="./assets/Снимок экрана IELTS.png" alt="Бланк результатов теста IELTS" loading="lazy">
+            <p class="small muted">Бланк результатов теста IELTS (PDF)</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="story" class="section story">
     <div class="container">
       <h2 class="h2">Моя история: от внутренней дисциплины к продуктам</h2>
@@ -361,7 +451,7 @@
           <div id="storyProgress" aria-hidden="true"></div>
           <div class="milestone"><div class="when">Глава 1 · Первые 5 лет — Фундамент</div><div class="what">От хаоса к системе</div><div class="desc">Преодоление наследия прошлого, работа с дисциплиной и вниманием. Рождение личной философии и проверка её на прочность. Теоретическое изучение мира и бизнес‑моделей, чтобы понять, <em>как устроены механики роста</em>.</div><div class="chips"><span class="chip">ежедневные практики</span><span class="chip">принципы/рамки</span><span class="chip">бизнес‑книги → конспекты</span></div></div>
           <div class="milestone"><div class="when">Развилки</div><div class="what">Терял ориентиры — возвращался сильнее</div><div class="desc">Несколько раз приходилось останавливаться и переосмысливать курс. Каждый раз — возврат к базовым ценностям и обновлённый план действий.</div><div class="chips"><span class="chip">рефрейминг</span><span class="chip">антихрупкость</span><span class="chip">фокус</span></div></div>
-          <div class="milestone"><div class="when">Глава 2 · Следующие 5 лет — Практика</div><div class="what">Применение знаний в реальном мире</div><div class="desc">Маркетинг, MarTech и автоматизация на Python. Продуктовые эксперименты, Telegram‑боты, продакшен. Рост метрик у клиентов и запуск собственного IT‑продукта.</div><div class="chips"><span class="chip">+30% вовлечённость</span><span class="chip">−15% CPL</span><span class="chip">+18% конверсия</span></div></div>
+          <div class="milestone"><div class="when">Глава 2 · Следующие 5 лет — Практика</div><div class="what">Применение знаний в реальном мире</div><div class="desc">Маркетинг, MarTech и Python автоматизация. Продуктовые эксперименты, Telegram‑боты, продакшен. Рост метрик у клиентов и запуск собственного IT‑продукта.</div><div class="chips"><span class="chip">+30% вовлечённость</span><span class="chip">−15% CPL</span><span class="chip">+18% конверсия</span></div></div>
           <div class="milestone"><div class="when">Сегодня</div><div class="what">Чёткое видение и спокойная скорость</div><div class="desc">Умею соединять стратегию, креатив и код — от идеи до устойчивой системы роста.</div></div>
         </div>
         <div class="card reveal"><div class="card-title">Визуально: чем я становился сильнее</div><div class="small muted" style="margin-bottom:8px">Шкалы заполняются при прокрутке</div><div class="bars"><div class="label">Мышление и дисциплина</div><div class="bar"><i data-w="92"></i></div><div class="label" style="margin-top:8px">Бизнес‑мышление (модели/стратегии)</div><div class="bar"><i data-w="86"></i></div><div class="label" style="margin-top:8px">Практика (MarTech, продакшен)</div><div class="bar"><i data-w="94"></i></div></div><div class="story-cta"><span class="muted">Готов применить эти навыки под ваши метрики.</span><a class="cta magnet" href="https://t.me/Ka_yooo_ma" target="_blank" rel="noopener" onmousemove="btnHover(event)" onmouseleave="btnLeave(event)"><span class="dot"></span><span>Обсудить задачу в Telegram</span></a></div></div>
