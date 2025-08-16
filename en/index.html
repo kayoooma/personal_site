@@ -60,22 +60,49 @@
     .lang-mobile a.active{outline:2px solid color-mix(in oklab, var(--accent) 35%, transparent)}
 
     /* ===== CTA button ===== */
-    .cta{--pad:14px 18px; display:inline-flex; align-items:center; gap:10px; padding:var(--pad); border-radius:14px; border:1px solid var(--line); background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 94%, transparent)); box-shadow:var(--shadow); position:relative; overflow:hidden}
+    .cta{--pad:14px 18px; display:inline-flex; align-items:center; gap:10px; padding:var(--pad); border-radius:14px; border:1px solid var(--line); background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 94%, transparent)); box-shadow:var(--shadow); position:relative; overflow:hidden;}
     .cta span{font-weight:600}
     .cta::after{content:""; position:absolute; inset:0; background:radial-gradient(600px 160px at var(--mx,50%) -20%, color-mix(in oklab, var(--accent) 38%, transparent), transparent 60%); transition:200ms ease}
     .cta:hover{transform:translateY(-1px)}
     .cta .dot{width:9px; height:9px; background:var(--accent); border-radius:50%; box-shadow:0 0 22px color-mix(in oklab, var(--accent) 80%, transparent)}
 
     /* Chrome buttons for Silver palettes */
-    html[data-palette="silver-light"] .cta, html[data-palette="silver-dark"] .cta{
-      color: var(--text);
+    html[data-palette="silver-light"] .cta{
+      color: #0b1220 !important; /* Explicitly dark text for silver-light palette */
       background:
         linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.25) 38%, rgba(0,0,0,.08) 72%),
         linear-gradient(110deg, #f6f7f9 0%, #e3e7ed 18%, #fbfcfd 36%, #cfd6df 52%, #f6f7f9 68%, #dde3ea 84%, #fbfcfd 100%);
       border:1px solid color-mix(in oklab, var(--accent) 55%, #ffffff);
       box-shadow: 0 8px 20px rgba(0,0,0,.10), inset 0 1px rgba(255,255,255,.85), inset 0 -1px rgba(0,0,0,.18);
     }
-    html[data-palette="silver-dark"] .cta, html[data-palette="silver-dark"] .cta span{ color:#0b1220 !important; text-shadow:none; }
+    html[data-palette="silver-light"] .cta span{
+      color: #0b1220 !important; /* Ensure span also gets dark text */
+    }
+
+    html[data-palette="silver-dark"] .cta,
+    html[data-palette="silver-dark"] .cta span {
+      color: white !important; /* Force white text for CTA in silver-dark */
+      text-shadow: none;
+    }
+
+
+    /* Fix for .ghost button visibility on silver-light palette */
+    html[data-palette="silver-light"] .ghost {
+      color: #334155 !important; /* Darker text for visibility */
+      border: 1px dashed #94a3b8; /* Darker dashed border */
+      background: transparent; /* Ensure transparent background */
+    }
+    /* Ensure ghost buttons on dark themes have proper contrast */
+    html[data-palette="silver-dark"] .ghost {
+      color: white !important; /* Force white text for ghost button in silver-dark */
+      border: 1px dashed var(--line); /* Use line variable for border */
+      background: transparent;
+    }
+    html:not([data-palette="silver-light"]):not([data-palette="silver-dark"]) .ghost {
+      color: var(--text) !important; /* Use general text color for other dark themes */
+      border: 1px dashed color-mix(in oklab, var(--line) 100%, transparent);
+    }
+
 
     .menu-toggle{display:none; background:transparent; border:1px solid var(--line); border-radius:12px; padding:8px 12px; color:var(--muted)}
     .menu-toggle svg{display:block}
@@ -182,9 +209,12 @@
     #storyProgress{position:absolute; left:12px; top:14px; width:2px; height:0%; background:linear-gradient(180deg, var(--accent), var(--accent-2)); border-radius:2px; box-shadow:0 0 14px color-mix(in oklab, var(--accent) 40%, transparent)}
     .milestone{position:relative; margin:12px 0 12px 28px; padding:14px 16px; border:1px dashed var(--line); border-radius:14px; background:color-mix(in oklab, var(--panel) 96%, transparent)}
     .milestone::before{content:""; position:absolute; left:-26px; top:18px; width:12px; height:12px; border-radius:50%; background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent)}
-    .milestone .when{font:600 12px/1.1 Inter; color:var(--muted); letter-spacing:.3px}
+    .milestone .when{font:600 12px/1.1 Inter; letter-spacing:.3px; color:var(--muted)}
     .milestone .what{font-weight:650; margin:4px 0}
     .milestone .desc{color:#cbd1db}
+    /* Adjusted styles for milestone text in silver-light palette */
+    html[data-palette="silver-light"] .milestone .what { color: #1f2937; }
+    html[data-palette="silver-light"] .milestone .desc { color: #334155; }
     .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
     .chip{font:600 11px/1 Inter; letter-spacing:.3px; padding:6px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); background:color-mix(in oklab, var(--panel) 92%, transparent)}
     .bars{display:grid; gap:10px}
@@ -271,6 +301,34 @@
     .certificate-card a:hover {
       text-decoration: underline;
     }
+
+    /* Silver Light Palette Specific Overrides for Text Readability */
+    html[data-palette="silver-light"] .lead,
+    html[data-palette="silver-light"] .subtitle,
+    html[data-palette="silver-light"] .p,
+    html[data-palette="silver-light"] .muted,
+    html[data-palette="silver-light"] .milestone .desc,
+    html[data-palette="silver-light"] .milestone .when {
+        color: #334155; /* Darker gray for general text */
+    }
+
+    html[data-palette="silver-light"] .milestone .what,
+    html[data-palette="silver-light"] .card .card-title,
+    html[data-palette="silver-light"] .h2 {
+        color: #1f2937; /* Even darker for titles and headings */
+    }
+
+    html[data-palette="silver-light"] .label {
+      color: #475569; /* Darker for labels, similar to muted but slightly more prominent */
+    }
+
+    html[data-palette="silver-light"] .kpi .cap {
+        color: #4b5563; /* Ensures KPI captions are readable */
+    }
+    html[data-palette="silver-light"] .input,
+    html[data-palette="silver-light"] .number {
+        color: #0b1220; /* Darker text for input fields */
+    }
   </style>
 </head>
 <body>
@@ -302,6 +360,7 @@
         <a href="#cases" onclick="closeMenu()">Cases</a>
         <a href="#skills" onclick="closeMenu()">Skills</a>
         <a href="#experience" onclick="closeMenu()">Experience</a>
+        <a href="#education" onclick="closeMenu()">Education</a> <!-- Added Education link -->
         <a href="#story" onclick="closeMenu()">Story</a>
         <a href="#lab" onclick="closeMenu()">Lab</a>
         <a href="#contacts" onclick="closeMenu()">Contacts</a>
