@@ -112,10 +112,24 @@
     .neon-laser{z-index:-4; background:linear-gradient(120deg, transparent 45%, color-mix(in oklab, var(--accent-2) 18%, transparent) 50%, transparent 55%), linear-gradient(-120deg, transparent 45%, color-mix(in oklab, var(--accent) 18%, transparent) 50%, transparent 55%); animation: laserSweep 9s linear infinite}
     @keyframes laserSweep{0%{background-position:-200% 0, 200% 0}100%{background-position:200% 0, -200% 0}}
 
-    .glass-orbs{z-index:-5; filter:blur(60px) saturate(120%); opacity:.42}
+    .glass-orbs{z-index:-5; filter:blur(60px) saturate(120%); opacity:.42; animation:orbMove 30s ease-in-out infinite alternate;}
     .glass-orbs::before, .glass-orbs::after{content:""; position:absolute; width:720px; height:720px; border-radius:50%; filter:blur(40px);} 
-    .glass-orbs::before{left:-120px; top:-160px; background:radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--accent) 90%, transparent), transparent 60%)}
-    .glass-orbs::after{right:-160px; bottom:-160px; background:radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--accent-2) 90%, transparent), transparent 60%)}
+    .glass-orbs::before{left:-120px; top:-160px; background:radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--accent) 90%, transparent), transparent 60%); animation:orb1Anim 28s ease-in-out infinite alternate;}
+    .glass-orbs::after{right:-160px; bottom:-160px; background:radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--accent-2) 90%, transparent), transparent 60%); animation:orb2Anim 24s ease-in-out infinite alternate;}
+
+    @keyframes orbMove {
+      0% { transform: scale(1) translateX(0) translateY(0); }
+      50% { transform: scale(1.05) translateX(10px) translateY(10px); }
+      100% { transform: scale(1) translateX(0) translateY(0); }
+    }
+    @keyframes orb1Anim {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(20px, 30px); }
+    }
+    @keyframes orb2Anim {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-30px, -20px); }
+    }
 
     .graphite-stripes{z-index:-5; opacity:.18; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 10px)}
 
@@ -223,6 +237,40 @@
     .session-tip button{ border:none; background:transparent; color:var(--muted); cursor:pointer; border-radius:10px; padding:6px; }
     .session-tip::after{ content:""; position:absolute; left:var(--tail-x, 32px); bottom:-7px; width:14px; height:14px; transform:rotate(45deg); background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 92%, transparent)); border-right:1px solid var(--line); border-bottom:1px solid var(--line); border-radius:2px; filter:drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
     @media (max-width:640px){ .session-tip{ right:calc(max(10px, env(safe-area-inset-right, 0px)) + 6px); width:clamp(240px,60vw,360px);} }
+    
+    /* Styles for certificate images */
+    .certificate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust minmax as needed */
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .certificate-card {
+      background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 98%, transparent), color-mix(in oklab, var(--panel) 100%, transparent));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px; /* Slightly less padding for images */
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .certificate-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px; /* Slightly rounded corners for images */
+      margin-bottom: 10px;
+    }
+    .certificate-card a {
+      font-weight: 600;
+      color: var(--accent); /* Accent color for links */
+      text-decoration: none;
+      margin-top: 5px;
+    }
+    .certificate-card a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -337,6 +385,44 @@
       <div class="card reveal"><div class="card-title">Fiverr — 3D Motion Designer</div><p class="small muted">Jun 2020 — Aug 2023</p><p class="muted">Commercial 3D animations (Romania, India, Nigeria, USA). Blender, characters, product shots, logos.</p></div>
       <div class="card reveal"><div class="card-title">Mirvalino Industries — SMM Manager</div><p class="small muted">Oct 2021 — May 2023</p><p class="muted">Content plan, creatives, targeting, market, bookkeeping.</p></div>
     </div>
+    </div>
+  </section>
+
+  <section id="education" class="section">
+    <div class="container">
+      <h2 class="h2">Education & Certifications</h2>
+      <div class="grid cols-2" style="margin-top:8px">
+        <div class="card reveal"><div class="card-title">Education</div><ul class="muted"><li>National University of Uzbekistan — Economics/HR (expected 2026)</li><li>School #178</li></ul></div>
+        <div class="card reveal"><div class="card-title">Courses & Certifications</div><ul class="muted"><li>PMI: Fundamentals of Predictive Project Management (2024)</li><li>ChatGPT for Business & Advertising (2024)</li><li>Neural Networks for Marketers (2024)</li><li>Automation 2.0 — AI Employees (2024)</li><li>Udemy: Google Ads (2024)</li><li>Skillshare: Advanced/Product 3D Animation (2023)</li><li>IELTS 6.5</li></ul></div>
+      </div>
+      <!-- Certificates section -->
+      <h3 class="h2" style="margin-top: 40px;">Certificates</h3>
+      <div class="certificate-grid">
+        <div class="certificate-card reveal">
+          <img src="../assets/photo_2025-08-12_03-31-45.jpg" alt="Skillshare: Product Animation in Blender Certificate" loading="lazy">
+          <p class="small muted">Skillshare: Product Animation in Blender</p>
+        </div>
+        <div class="certificate-card reveal">
+          <img src="../assets/photo_2025-08-12_03-32-19.jpg" alt="Skillshare: Advanced 3D Animation Certificate" loading="lazy">
+          <p class="small muted">Skillshare: Advanced 3D Animation</p>
+        </div>
+        <div class="certificate-card reveal">
+          <img src="../assets/sertificate Udemy Google Ads 78987096t7597ser.png" alt="Udemy: Google Ads Certificate" loading="lazy">
+          <p class="small muted">Udemy: Google Ads</p>
+        </div>
+        <div class="certificate-card reveal">
+          <a href="../assets/FundamentalsofPredictiveProjectManagement_Badge20240512_8_ogbfc1.pdf" target="_blank" rel="noopener">
+            <img src="../assets/pmi badge.png" alt="PMI Certification Badge" loading="lazy">
+            <p class="small muted">PMI: Fundamentals of Predictive Project Management (PDF)</p>
+          </a>
+        </div>
+        <div class="certificate-card reveal">
+          <a href="../assets/UZ00425501251-27-04-2025-ETRF.pdf" target="_blank" rel="noopener">
+            <img src="../assets/Снимок экрана IELTS.png" alt="IELTS Test Report Form" loading="lazy">
+            <p class="small muted">IELTS Test Report Form (PDF)</p>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
